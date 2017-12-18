@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+
+	<div class="main login_main minh100p bg_red_square abs">
+
+		<header class="h_header bo-b-1white">
+			<div class="nav-wrapper" onclick="location.href='login.html'">
+				<ul class="left tab_white">
+					<li><i class="fa fa-chevron-left" ></i> Regresar</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="h50"></div>
+
+		<section id="login">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 mt40">
+						<form method="post" class="form_login form">
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Afiliarse con </p>
+									<div class="cont-radio">
+										<div class="col s6 pad0">
+										    <p>
+										      <input name="group1" onclick="$('#div_client').css('display','block');$('#div_card').css('display','none');type_reg(0);" type="radio" id="test1" class="with-gap" checked />
+										      <label for="test1">Número de cliente</label>
+										    </p>
+										</div>
+										<div class="col s6 pad0">
+											<p>
+										      <input name="group1" onclick="$('#div_client').css('display','none');$('#div_card').css('display','block');type_reg(1);" type="radio" id="test2" class="with-gap" />
+										      <label for="test2">Número de tarjeta de crédito</label>
+										    </p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="div_client">
+									<p class="tit_forms">Número de cliente</p>
+									<input type="text" name="user" id="numberClient" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="div_card" style="display: none">
+									<p class="tit_forms">Número de tarjeta</p>
+									<input type="text" name="user" id="numberCard" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<button class="btn btn_red" type="button" onclick="post_registro_fb();">Regístrate</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<button class="btn btn_red" onclick="oprimir_back();" style="background: #3b5998;" type="button">Cerrar sesión de Facebook</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+	</div>
+</body>
+<script>
+	$(document).ready(function () {
+		getQueryVariable();
+		localStorage.setItem('type_reg',0);		
+		//Android.console_view('Datos: ' + window.location.href);
+	})
+
+	function getQueryVariable() {
+	   var query = decodeURI(window.location.search.substring(1));
+	   var vars = query.split("&");
+	   var id_fb = vars[0].split("=");
+	   var username = vars[1].split("=");
+	   var email_fb = vars[2].split("=");
+	   //var fb_data = [id_fb[1],username[1]];
+	   localStorage.setItem('fb_username',username[1]);
+	   localStorage.setItem('fb_id',id_fb[1]);
+	   localStorage.setItem('email_fb',email_fb[1]);
+	}
+
+	
+	function type_reg(val) {
+		localStorage.setItem('type_reg',val)
+		//Android.console_view('type_reg: ' + localStorage.getItem('type_reg'));
+        window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + localStorage.getItem('type_reg');
+	}
+	function post_registro_fb() {
+
+		var tipo = localStorage.getItem('type_reg');
+		//console.log(tipo);
+		if (tipo == 0) {
+			console.log(tipo);
+			$.post( "http://panel.santandertwist.com.mx/user/register_fb",{
+			
+			  	username: localStorage.getItem('fb_username'),
+			  	numberClient: $("#numberClient").val(),
+				email: localStorage.getItem('email_fb'),
+				password: localStorage.getItem('fb_id'),
+				password_confirmation: localStorage.getItem('fb_id')
+			})
+			.done(function( data ) {
+				console.log(data);
+				if (data.code==200) {
+					Materialize.toast(data.code + ' ' +data.message, 2000, '',function () {
+	      				login();
+	      			});	
+				}else if (data.code==403){
+					Materialize.toast(data.code + ' ' +data.message, 2000);
+				}
+			});
+		}
+		if (tipo == 1) {
+			console.log(tipo);
+			$.post( "http://panel.santandertwist.com.mx/user/register_fb",{
+			
+			  	username: localStorage.getItem('fb_username'),
+				numberCard: $("#numberCard").val(),
+				email: localStorage.getItem('email_fb'),
+				password: localStorage.getItem('fb_id'),
+				password_confirmation: localStorage.getItem('fb_id')
+			})
+			.done(function( data ) {
+				console.log(data);
+				if (data.code==200) {
+					Materialize.toast(data.code + ' ' +data.message, 2000, '',function () {
+	      				login();
+	      			});	
+				}else if (data.code==403){
+					Materialize.toast(data.code + ' ' +data.message, 2000);	
+				}
+				
+			});
+		}		
+	}
+
+	function login() {
+	//console.log('Login');
+	$("#cargador").show();
+	$.post( "http://panel.santandertwist.com.mx/user/login",{ 
+			username: '_' + localStorage.getItem('fb_username') + '_', 
+			password: localStorage.getItem('fb_id')
+		})
+      	.done(function( data ) {
+      		console.log(data);
+      		if (data.code==403) {
+      			$("#cargador").hide(); 
+      			Materialize.toast(data.message, 4000);
+      		}
+      		if (data.code==200) { 
+      			localStorage["userdata"] = JSON.stringify(data.userdata);  
+      			$("#cargador").hide();   			
+      			Materialize.toast(data.message, 2000, '',function () {
+      				window.location="index.html";
+      			});
+      		}
+    	});
+	}
+
+	function oprimir_back(){
+		localStorage.clear();
+    	window.history.back();
+   }
+</script>
+</html>

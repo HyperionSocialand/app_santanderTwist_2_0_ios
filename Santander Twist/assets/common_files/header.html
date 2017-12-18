@@ -1,0 +1,155 @@
+<header class="h_header">
+	<nav id="search_header">
+        <div class="nav-wrapper w100">
+          <span class="search-icon" id="search-iconm"><img id="close_mobile" src="img/header/ico_search.png" height="20px"></span>
+			<form action="/" method="post" class="search_h formsearch_hm">
+				<input type="text" name="q" class="search_h" id="search_hm" autocomplete="off"/>
+				<input type="hidden" name="filtro" id="filtro">
+				<input type="hidden" name="lat" id="lat">
+				<input type="hidden" name="long" id="long">
+				<input type="hidden" name="categoria" id="categoria" value="">
+				<button type="submit" class="btn_h">Buscar</button>
+			</form>
+        </div>
+    </nav>
+	<nav id="header_nav">
+		<div class="nav-wrapper">
+			<ul class="left">
+				<li>
+					<div id="main" class="inlMid" ng-click="mainOpen = true;" role="button" tabindex="0" onclick="openMenu();"></div>
+				</li>
+				<li>
+					<img src="img/header/logo-santander.png" height="17px">
+				</li>
+				<li>
+					<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+				</li>
+			</ul>
+			<ul class="right">
+				<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
+				<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+			</ul>
+			
+		</div>
+	</nav>
+</header>
+
+<div id="fondo_padre"></div>
+<div id="fondo_buscar"></div>
+<div id="filtros" class="trans_fact Container_Filtros" aria-hidden="true">
+	<ul>
+		<li onclick="select_filtro('cerca')">
+			<p>Cerca de mí</p>
+			<img src="img/check.png" class="right" style="display: block;" />
+		</li>
+		<li onclick="select_filtro('orden')">
+			<p>Orden Alfabético</p>
+			<img src="img/check.png" class="right" />
+		</li>
+		<li onclick="select_filtro('catego')">
+			<p>Categoría</p>
+			<img src="img/check.png" class="right" />
+			<ul class="list_ul_cat">
+				<li onclick="select_categoria('sienestar');">Bienestar</li>
+				<li onclick="select_categoria('compras');">Compras</li>
+				<li onclick="select_categoria('entretenimiento');">Entretenimiento</li>
+				<li onclick="select_categoria('restaurantes');">Restaurantes</li>
+				<li onclick="select_categoria('viajes');">Viajes</li>
+			</ul>
+		</li>
+		
+		
+	</ul>
+</div>
+
+<ul class="menu st" id="menuNew">
+	<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
+	<li class="mb20">
+		<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
+	</li>
+	<li>
+		<h6 class="not">  <img src="img/ic-account-circle.svg" onload='load_username()'> </h6>
+	</li>
+	<li onclick="mainMov(this)">
+		<h6>Promociones</h6>
+		<ul class="subMenu">
+			<li onclick="location.href='/?home=true'">Todos</li>
+			<li onclick="location.href='/?slug=true'">Bienestar</li>
+			<li onclick="location.href='/?slug=compras'">Compras</li>
+			<li onclick="location.href='/?slug=entretenimiento'">Entretenimiento</li>
+			<li onclick="location.href='/?slug=restaurantes'">Restaurantes</li>
+			<li onclick="location.href='/?slug=viajes'">Viajes</li>
+		</ul>
+	</li>
+	<li onclick="mainMov(this)">
+		<h6>Santander Plus</h6>
+		<ul class="subMenu">
+			<li onclick="location.href='plus.html'">Plus</li>
+			<li onclick="location.href='plus.html'">ShowCase</li>
+		</ul>
+	</li>
+	<li onclick="mainMov(this)">
+		<h6>Otros sitios</h6>
+		<ul class="subMenu">
+			<li>
+				<a href="#">Santander</a>
+			</li>
+			<li>
+				<a href="#">Recompensas</a>
+			</li>
+			<li>
+				<a href="#">AeroMéxico</a>
+			</li>
+			<li>
+				<a href="#">ViajaCompara</a>
+			</li>
+			<li>
+				<a href="#">Tiend@</a>
+			</li>
+			<li>
+				<a href="#">
+					Fiesta Rewards
+				</a>
+			</li>
+		</ul>
+	</li>
+	<li onclick="location.href = 'mi_perfil.html';">
+      	<h6 class="not">Mi perfil</h6>
+    </li>
+    <li>
+      	<h6 class="not">Mis favoritas</h6>
+    </li>
+    <li>
+      <h6 class="not">Cerrar sesión</h6>
+    </li>
+</ul>
+
+<div id="notificaciones2" class="st">
+	<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
+	<div class="cont_noti">
+		<ul>
+			<li>
+				<h5>Greñitas <span></span></h5>
+				<p>Participa de Células Madres Cryo- Cell</p>
+			</li>
+			<li>
+				<h5>Greñitas <span></span></h5>
+				<p>Participa de Células Madres Cryo- Cell</p>
+			</li>
+			<li>
+				<h5>Greñitas <span></span></h5>
+				<p>Participa de Células Madres Cryo- Cell</p>
+			</li>
+			<li>
+				<h5>Greñitas <span></span></h5>
+				<p>Participa de Células Madres Cryo- Cell</p>
+			</li>
+			<li>
+				<h5>Greñitas <span></span></h5>
+				<p>Participa de Células Madres Cryo- Cell</p>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="h50"></div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+	<div id="cargador" style="display: none;">
+		<div class="opa"></div>
+		<div class="row-100 conf_pop">
+			<div class="sk-circle">
+			  <div class="sk-circle1 sk-child"></div>
+			  <div class="sk-circle2 sk-child"></div>
+			  <div class="sk-circle3 sk-child"></div>
+			  <div class="sk-circle4 sk-child"></div>
+			  <div class="sk-circle5 sk-child"></div>
+			  <div class="sk-circle6 sk-child"></div>
+			  <div class="sk-circle7 sk-child"></div>
+			  <div class="sk-circle8 sk-child"></div>
+			  <div class="sk-circle9 sk-child"></div>
+			  <div class="sk-circle10 sk-child"></div>
+			  <div class="sk-circle11 sk-child"></div>
+			  <div class="sk-circle12 sk-child"></div>
+			</div>
+		</div>
+	</div>
+	<div class="main login_main minh100p bg_red_square abs">
+
+		<section id="login">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 mt40">
+						<form method="post" id="form" class="form_login form">
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Usuario </br>
+									<span class="fw300">(Si aún no tienes uno, utiliza tu correo electrónico)</span></p>
+									<input type="text" id="username" name="user" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Contraseña</p>
+									<input type="password" id="password" name="user" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<button onclick="login();" class="btn btn_red" type="button">Iniciar</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<button onclick="LoginFace();" class="btn btn_red" style="background: #3b5998;" type="button">Iniciar con Facebook</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center-align mt40">
+									<a href="olvidar_contrasena.html"><p class="tit_forms center-align"><span class="fw300">¿Olvidó su contraseña?</span></p></a>
+									<p class="tit_forms center-align"><span class="fw300">Aún no tienes cuenta?</span> <a href="registro.html">Regístrate</a></p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+	</div>
+</body>
+<script>
+function login() {
+	$("#cargador").show();
+	$.post( "http://panel.santandertwist.com.mx/user/login",{ 
+			username: $('#username').val(), 
+			password: $('#password').val()
+		})
+      	.done(function( data ) {
+      		console.log(data);
+      		if (data.code==403) {
+      			$("#cargador").hide(); 
+      			Materialize.toast(data.message, 4000);
+      		}
+      		if (data.code==200) { 
+      			localStorage["userdata"] = JSON.stringify(data.userdata);  
+      			$("#cargador").hide();   			
+      			Materialize.toast(data.message, 2000, '',function () {
+      				window.location="index.html";
+      			});
+      		}
+    });
+}
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		console.log(localStorage["userdata"]);
+    });
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+      userdata = JSON.parse(localStorage["userdata"]);
+        
+        if(userdata.username != "" && userdata.username != null){
+            window.location = "index.html";
+        }
+    });
+
+    function LoginFace() {
+    	
+        //Android.loginFaceBook(null);
+        window.location = "otrauri://loginfacebook?show_activity_indicator=true";
+
+    }
+	
+	function consoleLog(view) {
+		//Android.console_view(view);
+        window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
+	}
+</script>
+
+</html>

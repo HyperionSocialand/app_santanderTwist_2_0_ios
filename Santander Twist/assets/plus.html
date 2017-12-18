@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+	// Links to the libraries needed
+	<link rel="stylesheet" href="css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="css/change_slider.css">
+
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo_.css">
+</head>
+<body>
+	<div id="cargador" style="display: none;">
+		<div class="opa"></div>
+		<div class="row-100 conf_pop">
+			<div class="sk-circle">
+			  <div class="sk-circle1 sk-child"></div>
+			  <div class="sk-circle2 sk-child"></div>
+			  <div class="sk-circle3 sk-child"></div>
+			  <div class="sk-circle4 sk-child"></div>
+			  <div class="sk-circle5 sk-child"></div>
+			  <div class="sk-circle6 sk-child"></div>
+			  <div class="sk-circle7 sk-child"></div>
+			  <div class="sk-circle8 sk-child"></div>
+			  <div class="sk-circle9 sk-child"></div>
+			  <div class="sk-circle10 sk-child"></div>
+			  <div class="sk-circle11 sk-child"></div>
+			  <div class="sk-circle12 sk-child"></div>
+			</div>
+		</div>
+	</div>
+	<header class="h_header">
+		<nav id="search_header">
+	        <div class="nav-wrapper w100">
+	          <span class="search-icon" id="search-iconm"><img id="close_mobile" src="img/header/ico_search.png" height="20px"></span>
+				<form method="post" class="search_h formsearch_hm">
+					<input type="text" name="buscar" id="buscar_" class="search_h" id="search_hm" autocomplete="off"/>
+					<input type="hidden" name="filtro" id="filtro">
+					<input type="hidden" name="lat" id="lat">
+					<input type="hidden" name="long" id="long">
+					<input type="hidden" name="categoria" id="categoria" value="">
+					<button type="button" class="btn_h" onclick="busqueda($('#buscar_').val());/*closeBuscador();*/">Buscar</button>
+				</form>
+	        </div>
+	    </nav>
+		<nav id="header_nav">
+			<div class="nav-wrapper">
+				<ul class="left">
+					<li>
+						<div id="main" class="inlMid" ng-click="mainOpen = true;" role="button" tabindex="0" onclick="openMenu();"></div>
+					</li>
+					<li>
+						<img src="img/header/logo-santander.png" height="17px">
+					</li>
+					<li>
+						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+					</li>
+				</ul>
+				<ul class="right">
+					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
+					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+				</ul>
+				
+			</div>
+		</nav>
+	</header>
+
+	<div id="fondo_padre"></div>
+	<div id="fondo_buscar"></div>
+	<div id="filtros" class="trans_fact Container_Filtros" aria-hidden="true">
+		<ul>
+			<li onclick="select_filtro('cerca')">
+				<p>Cerca de mí</p>
+				<img src="img/check.png" class="right" style="display: block;" />
+			</li>
+			<li onclick="select_filtro('orden')">
+				<p>Orden Alfabético</p>
+				<img src="img/check.png" class="right" />
+			</li>
+			<li onclick="select_filtro('catego')">
+				<p>Categoría</p>
+				<img src="img/check.png" class="right" />
+				<ul class="list_ul_cat">
+					<li onclick="select_categoria('bienestar');">Bienestar</li>
+					<li onclick="select_categoria('compras');">Compras</li>
+					<li onclick="select_categoria('entretenimiento');">Entretenimiento</li>
+					<li onclick="select_categoria('restaurantes');">Restaurantes</li>
+					<li onclick="select_categoria('viajes');">Viajes</li>
+				</ul>
+			</li>
+			
+			
+		</ul>
+	</div>
+
+	<ul class="menu st" id="menuNew">
+		<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
+		<li class="mb20">
+			<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
+		</li>
+		<li>
+			<h6 class="not" id="not">  <img src="img/ic-account-circle.svg"> </h6>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Promociones</h6>
+			<ul class="subMenu">
+				<li  onclick="location.href='index.html?slug=todos'">Todos</li>
+				<li  onclick="location.href='index.html?slug=bienestar'">Bienestar</li>
+				<li  onclick="location.href='index.html?slug=compras'">Compras</li>
+				<li  onclick="location.href='index.html?slug=entretenimiento'">Entretenimiento</li>
+				<li  onclick="location.href='index.html?slug=restaurantes'">Restaurantes</li>
+				<li  onclick="location.href='index.html?slug=viajes'">Viajes</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Santander Plus</h6>
+			<ul class="subMenu">
+				<li onclick="location.href='plus.html'">Plus</li>
+				<li onclick="location.href='plus.html'">ShowCase</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Otros sitios</h6>
+			<ul class="subMenu">
+				<li>
+					<a href="#">Santander</a>
+				</li>
+				<li>
+					<a href="#">Recompensas</a>
+				</li>
+				<li>
+					<a href="#">AeroMéxico</a>
+				</li>
+				<li>
+					<a href="#">ViajaCompara</a>
+				</li>
+				<li>
+					<a href="#">Tiend@</a>
+				</li>
+				<li>
+					<a href="#">
+						Fiesta Rewards
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li onclick="location.href = 'mi_perfil.html';">
+	      	<h6 class="not">Mi perfil</h6>
+	    </li>
+	    <li>
+	      	<h6 class="not">Mis favoritas</h6>
+	    </li>
+	    <li onclick="logout()">
+	      <h6 class="not">Cerrar sesión</h6>
+	    </li>
+	</ul>
+
+	<div id="notificaciones2" class="st">
+		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
+		<div class="cont_noti">
+			<ul>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="h29"></div>
+
+	<div class="main minh200">
+		<section>
+			<div class="pos_relative">
+				<div class="slider" id="sl_banner">
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="row-100">
+						<img src="img/ShowcaseTitle.jpg" class="row-100">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="boder-dashed">
+			<div class="row-80-center pos_relative">
+				<div class="slider" id="sl_tickets">
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="s_10"></div>
+					<div class="row-100 text_center">
+						<h3 class="txt_h3">Promociones exclusivas que</br>Santander Twist tiene para ti.</h3>
+					</div>
+					<div class="s_10"></div>
+					<div class="row-100 text_center">
+						<select class="browser-default col s12" id="minimal" onchange="load_promos_state(this.value)">
+
+						</select>
+					</div>
+					<div class="row-100 text_center">
+						<button type="button" onclick="load_promos_cerca()" class="btn_geo">Cercanos a mí <img src="img/ic_check_white.svg" class="img_btn_geo"></button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="row-100">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<div class="row">
+							<div class="col s12 cupones" id="promos_">
+								<p class="btn_plus">TODAS LAS PROMOCIONES</p>
+								<div class="col s6">
+									<div class="cupon">
+										<div class="cnt">
+											<a href="#">
+												<div class="imagen-over">
+													<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx/uploads/small_images/twist-laliga-300x195_TSlSwgaEhaZYNCgbEaD0gk5QZ6UiqY8w.png);"></div>
+												</div>
+											</a>
+											<div class="starCont">
+												<img src="img/ic_corazon_white.svg" class="hide responsive-img">
+												<img src="img/ic_corazon_red.svg" class="responsive-img">
+											</div>
+										</div>
+										<div class="action cntR">
+											<div class="ssrr">
+												<i class="fa fa-facebook-square fa-2x icono pointer"></i>
+												<i class="fa fa-twitter-square fa-2x icono pointer"></i>
+												<a href="">
+													<img src="img/whatsapp_gris.svg" width="27px">
+												</a>
+											</div>
+											<button class="btn btn_red_white">Ver Promoción</button>
+										</div>
+										
+									</div>
+								</div>
+								<div class="col s6">
+									<div class="cupon">
+										<div class="cnt">
+											<a href="#">
+												<div class="imagen-over">
+													<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx/uploads/small_images/twist-laliga-300x195_TSlSwgaEhaZYNCgbEaD0gk5QZ6UiqY8w.png);"></div>
+												</div>
+											</a>
+											<div class="starCont">
+												<img src="img/ic_corazon_white.svg" class="responsive-img">
+												<img src="img/ic_corazon_red.svg" class="hide responsive-img">
+											</div>
+										</div>
+										<div class="action cntR">
+											<div class="ssrr">
+												<i class="fa fa-facebook-square fa-2x icono pointer"></i>
+												<i class="fa fa-twitter-square fa-2x icono pointer"></i>
+												<a href="">
+													<img src="img/whatsapp_gris.svg" width="27px">
+												</a>
+											</div>
+											<button class="btn btn_red_white">Ver Promoción</button>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<footer class="footer">
+		<div class="top_footer ">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<ul class="top_foo">
+							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
+							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
+							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="back_footer">
+			<div class="container">
+				<div class="row mb0">
+					<div class="col s12 bottom_foot">
+						<div class="col s12">
+							<p>Para mayores informes de comisiones, contrataciones y beneficios del producto consultar <a href="http://www.santander.com.mx/" target="_blank" id="Footer:  www.santander.com.mx" analytics-on="click">www.santander.com.mx</a></p>
+						</div>
+						<div class="col s12 right-align">
+							<div class="redes_footer">
+								<a href="https://www.facebook.com/SantanderMex" target="_blank"><img src="img/header/facebook.svg" class="ic_ssrr" id="Footer: Share FB" analytics-on="click"></a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://twitter.com/SantanderMx" target="_blank">
+									<img src="img/header/twitter.svg" class="ic_ssrr" id="Footer: Share TW" analytics-on="click">
+								</a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://www.youtube.com/user/SantanderMex?&amp;ab_channel=SantanderMex" target="_blank">
+									<img src="img/header/youtube.svg" class="ic_ssrr" id="Footer: Share YT" analytics-on="click">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/jquery.bxslider.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+		
+		// Initialize the slider
+		<script>
+		  $(document).ready(function(){
+		  	userdata = JSON.parse(localStorage["userdata"]);		  	
+			$('#not').append(" " + userdata.username);
+		  	load_promos();
+		    load_banners();
+		    load_tickets();
+		    load_estados();
+
+			
+		  });
+
+		  function load_banners() {
+		  	$('#cargador').show();
+		  	$.get( "http://panel.santandertwist.com.mx/api/active_banners_plus",{
+			})
+		    .done(function( data ) {	 
+		    	var html = ''; 
+		    	$.each(data.banners, function (key,value) {
+		    		var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://santandertwist.com.mx');
+		    		html += '<div><img onclick="redirect_banner(\'' + value.banner_url + '\');" src="' + str + '"></div>';
+		    	})
+		    	$('#sl_banner').html(html);     		
+		    });
+		  }
+
+		    function load_tickets() {
+		  	$.get( "http://panel.santandertwist.com.mx/api/active_carousel_plus",{
+			})
+		    .done(function( data ) {	
+		    	console.log(data);	 
+		    	var html = ''; 
+		    	$.each(data, function (key,value) {
+		    		html += '<div><img onclick="redirect_banner(\'' + value.url + '\');" src="https://santandertwist.com.mx' + value.carousel_plus_banner + '"></div>';
+		    	})
+		    	$('#sl_tickets').html(html); 
+		    	$('.slider').bxSlider({
+					auto: true  
+				});  
+		    	$('#cargador').hide();    		
+		    });
+
+		  }	
+
+		  function load_promos() {
+		  	reactivar_todas();
+		  	$("#cargador").show();
+		  	$.post( "http://panel.santandertwist.com.mx/api/active_promos/get20PromosPlus",{
+			})
+		    .done(function( data ) {
+		    	console.log(data);
+		    	var html = '';
+		      	$.each(data, function( index, value ) {
+		      		html += '<div class="col s6">';
+						html += '<div class="cupon">';
+							html += '<div class="cnt">';
+								html += '<a onclick="promo_interior(\''+value.link+'\')">';
+									html += '<div class="imagen-over">';
+										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+									html += '</div>';
+								html += '</a>';
+								html += '<div class="starCont">';
+									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
+									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="action cntR">';
+								html += '<div class="ssrr">';
+									html += '<i class="fa fa-facebook-square fa-2x icono pointer"></i>';
+									html += '<i class="fa fa-twitter-square fa-2x icono pointer"></i>';
+									html += '<a href="">';
+										html += '<img src="img/whatsapp_gris.svg" width="27px">';
+									html += '</a>';
+								html += '</div>';
+								html += '<button class="btn btn_red_white" onclick="promo_interior(\''+value.link+'\')">Ver Promoción</button>';
+							html += '</div>';										
+						html += '</div>';
+					html += '</div>';
+					//alert( index + ": " + value.promo_id );
+				});
+				$('#promos_').html(html);
+				$("#cargador").hide();		      		
+		    });
+		  }
+
+		  function load_promos_state(state) {
+		  	reactivar_todas();
+			$("#cargador").show();		  	
+		  	$.get( "http://panel.santandertwist.com.mx/api/active_promos/get20PromosByStatePlus?state_code=" + state,{
+		  		
+			})
+		    .done(function( data ) {	
+		    	console.log(data); 
+		    	var html = '';
+		      	$.each(data.promo_by_state, function( index, value ) {
+		      		html += '<div class="col s6">';
+						html += '<div class="cupon">';
+							html += '<div class="cnt">';
+								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+									html += '<div class="imagen-over">';
+										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+									html += '</div>';
+								html += '</a>';
+								html += '<div class="starCont">';
+									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
+									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="action cntR">';
+								html += '<div class="ssrr">';
+									html += '<i class="fa fa-facebook-square fa-2x icono pointer"></i>';
+									html += '<i class="fa fa-twitter-square fa-2x icono pointer"></i>';
+									html += '<a href="">';
+										html += '<img src="img/whatsapp_gris.svg" width="27px">';
+									html += '</a>';
+								html += '</div>';
+								html += '<button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\')">Ver Promoción</button>';
+							html += '</div>';										
+						html += '</div>';
+					html += '</div>';
+					//alert( index + ": " + value.promo_id );
+				});
+				$('#promos_').html(html);
+				$("#cargador").hide();
+		    });	
+		  }
+
+		  function load_promos_cerca() {
+		  	reactivar_todas();
+			$("#cargador").show();
+		  	$.get( "http://panel.santandertwist.com.mx/api/get_cerca_de_mi_plus",{
+		  		
+			})
+		    .done(function( data ) {	
+		    	console.log(data); 
+		    	var html = '';
+		      	$.each(data.promos, function( index, value ) {
+		      		html += '<div class="col s6">';
+						html += '<div class="cupon">';
+							html += '<div class="cnt">';
+								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+									html += '<div class="imagen-over">';
+										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+									html += '</div>';
+								html += '</a>';
+								html += '<div class="starCont">';
+									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
+									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+								html += '</div>';
+							html += '</div>';
+							html += '<div class="action cntR">';
+								html += '<div class="ssrr">';
+									html += '<i class="fa fa-facebook-square fa-2x icono pointer"></i>';
+									html += '<i class="fa fa-twitter-square fa-2x icono pointer"></i>';
+									html += '<a href="">';
+										html += '<img src="img/whatsapp_gris.svg" width="27px">';
+									html += '</a>';
+								html += '</div>';
+								html += '<button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\')">Ver Promoción</button>';
+							html += '</div>';										
+						html += '</div>';
+					html += '</div>';
+					//alert( index + ": " + value.promo_id );
+				});
+				$('#promos_').html(html);
+				$("#cargador").hide();
+		    });
+		  }
+
+		  function promo_interior(link) {
+		  	//console.log(slug);
+		  	//localStorage.setItem("promo_interior", slug);
+		  	window.location = link;
+		  }
+
+		  function redirect_banner(liga) {
+		  	localStorage.setItem("redirect_banner", liga);
+		  	window.location = liga;
+		  }
+		</script>
+	</div>
+</body>
+</html>

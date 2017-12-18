@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+
+	<link rel="stylesheet" type="text/css" href="css/material-icons.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+
+	<header class="h_header">
+		<nav id="search_header">
+	        <div class="nav-wrapper w100">
+	          <span class="search-icon" id="search-iconm"><img id="close_mobile" src="img/header/ico_search.png" height="20px"></span>
+				<form method="post" class="search_h formsearch_hm">
+					<input type="text" name="buscar" id="buscar_" class="search_h" id="search_hm" autocomplete="off"/>
+					<input type="hidden" name="filtro" id="filtro">
+					<input type="hidden" name="lat" id="lat">
+					<input type="hidden" name="long" id="long">
+					<input type="hidden" name="categoria" id="categoria" value="">
+					<button type="button" class="btn_h" onclick="busqueda($('#buscar_').val());/*closeBuscador();*/">Buscar</button>
+				</form>
+	        </div>
+	    </nav>
+		<nav id="header_nav">
+			<div class="nav-wrapper">
+				<ul class="left">
+					<li>
+						<div id="main" class="inlMid" ng-click="mainOpen = true;" role="button" tabindex="0" onclick="openMenu();"></div>
+					</li>
+					<li>
+						<img src="img/header/logo-santander.png" height="17px">
+					</li>
+					<li>
+						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+					</li>
+				</ul>
+				<ul class="right">
+					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
+					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+				</ul>
+				
+			</div>
+		</nav>
+	</header>
+
+	<div id="fondo_padre"></div>
+	<div id="fondo_buscar"></div>
+	<div id="filtros" class="trans_fact Container_Filtros" aria-hidden="true">
+		<ul>
+			<li onclick="select_filtro('cerca')">
+				<p>Cerca de mí</p>
+				<img src="img/check.png" class="right" style="display: block;" />
+			</li>
+			<li onclick="select_filtro('orden')">
+				<p>Orden Alfabético</p>
+				<img src="img/check.png" class="right" />
+			</li>
+			<li onclick="select_filtro('catego')">
+				<p>Categoría</p>
+				<img src="img/check.png" class="right" />
+				<ul class="list_ul_cat">
+					<li onclick="select_categoria('bienestar');">Bienestar</li>
+					<li onclick="select_categoria('compras');">Compras</li>
+					<li onclick="select_categoria('entretenimiento');">Entretenimiento</li>
+					<li onclick="select_categoria('restaurantes');">Restaurantes</li>
+					<li onclick="select_categoria('viajes');">Viajes</li>
+				</ul>
+			</li>
+			
+			
+		</ul>
+	</div>
+
+	<ul class="menu st" id="menuNew">
+		<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
+		<li class="mb20">
+			<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
+		</li>
+		<li>
+			<h6 class="not" id="not">  <img src="img/ic-account-circle.svg"> </h6>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Promociones</h6>
+			<ul class="subMenu">
+				<li  onclick="location.href='index.html?slug=todos'">Todos</li>
+				<li  onclick="location.href='index.html?slug=bienestar'">Bienestar</li>
+				<li  onclick="location.href='index.html?slug=compras'">Compras</li>
+				<li  onclick="location.href='index.html?slug=entretenimiento'">Entretenimiento</li>
+				<li  onclick="location.href='index.html?slug=restaurantes'">Restaurantes</li>
+				<li  onclick="location.href='index.html?slug=viajes'">Viajes</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Santander Plus</h6>
+			<ul class="subMenu">
+				<li onclick="location.href='plus.html'">Plus</li>
+				<li onclick="location.href='plus.html'">ShowCase</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Otros sitios</h6>
+			<ul class="subMenu">
+				<li>
+					<a href="#">Santander</a>
+				</li>
+				<li>
+					<a href="#">Recompensas</a>
+				</li>
+				<li>
+					<a href="#">AeroMéxico</a>
+				</li>
+				<li>
+					<a href="#">ViajaCompara</a>
+				</li>
+				<li>
+					<a href="#">Tiend@</a>
+				</li>
+				<li>
+					<a href="#">
+						Fiesta Rewards
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li onclick="location.href = 'mi_perfil.html';">
+	      	<h6 class="not">Mi perfil</h6>
+	    </li>
+	    <li>
+	      	<h6 class="not">Mis favoritas</h6>
+	    </li>
+	    <li onclick="logout()">
+	      <h6 class="not">Cerrar sesión</h6>
+	    </li>
+	</ul>
+
+	<div id="notificaciones2" class="st">
+		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
+		<div class="cont_noti">
+			<ul>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="h50"></div>
+
+	<div class="main minh300">
+
+		<section id="contacto">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<h1 class="left-align tit_miperfil mt40">Contáctanos</h1>
+						<form method="post" id="form" class="form">
+							<div class="row">
+								<div class="col s12">
+									<h2 class="sub_tit_contacto">Superlínea</h2>
+									<p class="txt_contacto mg0">DF y Zona Metropolitana</p>
+									<p class="txt_contacto mg0">5169-4300</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col s12">
+									<h2 class="sub_tit_contacto mt20">Línea Recompensa</h2>
+									<p class="txt_contacto mg0">01 800 RECOMPE (73-266-73)</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Nombre</p>
+									<input type="text" id="nombre" name="" class="validate"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Mail de contacto</p>
+									<input type="text" id="mail" name="" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>¿En que te podemos ayudar?</p>
+									<textarea id="ayuda" class="validate" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center-align">
+									<button class="btn btn_actualizar" type="button" onclick="sendMail()">Enviar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<footer class="footer">
+		<div class="top_footer ">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<ul class="top_foo">
+							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
+							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
+							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="back_footer">
+			<div class="container">
+				<div class="row mb0">
+					<div class="col s12 bottom_foot">
+						<div class="col s12">
+							<p>Para mayores informes de comisiones, contrataciones y beneficios del producto consultar <a href="http://www.santander.com.mx/" target="_blank" id="Footer:  www.santander.com.mx" analytics-on="click">www.santander.com.mx</a></p>
+						</div>
+						<div class="col s12 right-align">
+							<div class="redes_footer">
+								<a href="https://www.facebook.com/SantanderMex" target="_blank"><img src="img/header/facebook.svg" class="ic_ssrr" id="Footer: Share FB" analytics-on="click"></a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://twitter.com/SantanderMx" target="_blank">
+									<img src="img/header/twitter.svg" class="ic_ssrr" id="Footer: Share TW" analytics-on="click">
+								</a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://www.youtube.com/user/SantanderMex?&amp;ab_channel=SantanderMex" target="_blank">
+									<img src="img/header/youtube.svg" class="ic_ssrr" id="Footer: Share YT" analytics-on="click">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+		<script type="text/javascript" src="js/perfil.js"></script>
+	</div>
+</body>
+	<script>
+		$(document).ready(function() {
+			userdata = JSON.parse(localStorage["userdata"]);		  	
+			$('#not').append(" " + userdata.username);
+		})
+		function sendMail() {
+			$.post( "http://panel.santandertwist.com.mx/api/sendmail",{ 
+				name: $('#nombre').val(), 
+				email_contact: $('#mail').val(),
+				subject: $('#ayuda').val()
+			})
+	      	.done(function( data ) {
+	      		console.log(data); 
+	      		Materialize.toast(data.message, 4000);     		
+	    	});
+		}		
+	</script>
+</html>

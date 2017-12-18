@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+
+	<header class="h_header">
+		<nav id="search_header">
+	        <div class="nav-wrapper w100">
+	          <span class="search-icon" id="search-iconm"><img id="close_mobile" src="img/header/ico_search.png" height="20px"></span>
+				<form method="post" class="search_h formsearch_hm">
+					<input type="text" name="buscar" id="buscar_" class="search_h" id="search_hm" autocomplete="off"/>
+					<input type="hidden" name="filtro" id="filtro">
+					<input type="hidden" name="lat" id="lat">
+					<input type="hidden" name="long" id="long">
+					<input type="hidden" name="categoria" id="categoria" value="">
+					<button type="button" class="btn_h" onclick="busqueda($('#buscar_').val());/*closeBuscador();*/">Buscar</button>
+				</form>
+	        </div>
+	    </nav>
+		<nav id="header_nav">
+			<div class="nav-wrapper">
+				<ul class="left">
+					<li>
+						<div id="main" class="inlMid" ng-click="mainOpen = true;" role="button" tabindex="0" onclick="openMenu();"></div>
+					</li>
+					<li>
+						<img src="img/header/logo-santander.png" height="17px">
+					</li>
+					<li>
+						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+					</li>
+				</ul>
+				<ul class="right">
+					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
+					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+				</ul>
+				
+			</div>
+		</nav>
+	</header>
+
+	<div id="fondo_padre"></div>
+	<div id="fondo_buscar"></div>
+	<div id="filtros" class="trans_fact Container_Filtros" aria-hidden="true">
+		<ul>
+			<li onclick="select_filtro('cerca')">
+				<p>Cerca de mí</p>
+				<img src="img/check.png" class="right" style="display: block;" />
+			</li>
+			<li onclick="select_filtro('orden')">
+				<p>Orden Alfabético</p>
+				<img src="img/check.png" class="right" />
+			</li>
+			<li onclick="select_filtro('catego')">
+				<p>Categoría</p>
+				<img src="img/check.png" class="right" />
+				<ul class="list_ul_cat">
+					<li onclick="select_categoria('bienestar');">Bienestar</li>
+					<li onclick="select_categoria('compras');">Compras</li>
+					<li onclick="select_categoria('entretenimiento');">Entretenimiento</li>
+					<li onclick="select_categoria('restaurantes');">Restaurantes</li>
+					<li onclick="select_categoria('viajes');">Viajes</li>
+				</ul>
+			</li>
+			
+			
+		</ul>
+	</div>
+
+	<ul class="menu st" id="menuNew">
+		<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
+		<li class="mb20">
+			<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
+		</li>
+		<li>
+			<h6 class="not" id="not">  <img src="img/ic-account-circle.svg"> </h6>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Promociones</h6>
+			<ul class="subMenu">
+				<li  onclick="location.href='index.html?slug=todos'">Todos</li>
+				<li  onclick="location.href='index.html?slug=bienestar'">Bienestar</li>
+				<li  onclick="location.href='index.html?slug=compras'">Compras</li>
+				<li  onclick="location.href='index.html?slug=entretenimiento'">Entretenimiento</li>
+				<li  onclick="location.href='index.html?slug=restaurantes'">Restaurantes</li>
+				<li  onclick="location.href='index.html?slug=viajes'">Viajes</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Santander Plus</h6>
+			<ul class="subMenu">
+				<li onclick="location.href='plus.html'">Plus</li>
+				<li onclick="location.href='plus.html'">ShowCase</li>
+			</ul>
+		</li>
+		<li onclick="mainMov(this)">
+			<h6>Otros sitios</h6>
+			<ul class="subMenu">
+				<li>
+					<a href="#">Santander</a>
+				</li>
+				<li>
+					<a href="#">Recompensas</a>
+				</li>
+				<li>
+					<a href="#">AeroMéxico</a>
+				</li>
+				<li>
+					<a href="#">ViajaCompara</a>
+				</li>
+				<li>
+					<a href="#">Tiend@</a>
+				</li>
+				<li>
+					<a href="#">
+						Fiesta Rewards
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li onclick="location.href = 'mi_perfil.html';">
+	      	<h6 class="not">Mi perfil</h6>
+	    </li>
+	    <li>
+	      	<h6 class="not">Mis favoritas</h6>
+	    </li>
+	    <li onclick="logout()">
+	      <h6 class="not">Cerrar sesión</h6>
+	    </li>
+	</ul>
+
+	<div id="notificaciones2" class="st">
+		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
+		<div class="cont_noti">
+			<ul>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+				<li>
+					<h5>Greñitas <span></span></h5>
+					<p>Participa de Células Madres Cryo- Cell</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="h50"></div>
+
+	<div class="main minh300">
+
+		<section id="select">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<div class="row mobile_perfil">
+							<div class="input-field col s12 center-align">
+								<select value="" id="select_perfil" onchange="throw_function(this.value)">
+									<option value="1" selected="">Mi perfil</option>
+									<option value="2">Promociones activas</option>
+									<option value="3">Promociones redimidas</option>
+									<option value="4">Estado de cuenta</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+
+		<section id="sec_1" class="section_perfil" style="display: block;">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<h1 class="left-align tit_miperfil">Mi perfil</h1>
+						<form class="form" method="post">
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Usuario</p>
+									<input type="text" name="" id="username" class="validate" disabled value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Nombre</p>
+									<input type="text" name="" id="nombre" class="validate" value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Apellido paterno</p>
+									<input type="text" name="" id="a_paterno" class="validate" value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Apellido materno</p>
+									<input type="text" name="" id="a_materno" class="validate" value="">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 left-align">
+									<p>Correo electrónico</p>
+									<input type="email" name="" id="email" class="validate" value="">
+								</div>
+							</div>
+							<div class="row" id="pass_new">
+								<div class="input-field col s12 left-align">
+									<p>Contraseña nueva</p>
+									<input type="password" name="" class="validate">
+								</div>
+							</div>
+							<div class="row" id="pas_conf">
+								<div class="input-field col s12 left-align">
+									<p>Confirmar contraseña</p>
+									<input type="password" name="" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center-align">
+									<button class="btn btn_actualizar" id="btn_act" type="button">Actualizar</button>
+								</div>
+							</div>
+						</form>
+						<div class="row">
+							<div class="col s8 offset-s2 valign-wrapper center-align dv_conect_face mt20">
+								<img src="img/facebook_logo.png" class="responsive-img ">
+								<p class="administra_p left-align">Administra tu conexión a <span class="lt_red">Santander Twist</span> con tu cuenta de Facebook</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12 center-align">
+								<button id="bt_fb" class="btn btn_face"></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="sec_2" class="section_perfil">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<div class="row">
+							<div class="col s12 cupones" id="promos_activas">
+
+							</div>
+						</div>						
+						<div class="maxCont" id="div_no_act">
+							<div class="cuadro_bor_red" >
+								<h2>SIN PROMOCIONES ACTIVAS</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="sec_3" class="section_perfil">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<div class="contenido_tab_p">
+							<div class="cuadro_cont">
+								<div class="row" id="promos_redimidas">
+									
+								</div>
+							</div>
+						</div>						
+						<div class="maxCont" id="div_no_red">
+							<div class="cuadro_bor_red">
+								<h2>SIN PROMOCIONES REDIMIDAS</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="sec_4" class="section_perfil">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<div class="tab_p_cont mb40">
+							<ul class="mg0">
+								<li data="1" onclick="load_facturacion(1)" class="active">Promociones </br> vigentes</li>
+								<li data="2" onclick="load_facturacion(2)">Promociones </br> anteriores</li>
+							</ul>
+						</div>
+						<div class="contenido_tab_p">
+							<div class="cuadro_cont" id="cuadro_cont1">
+								
+							</div>
+							<div class="cuadro_cont" id="cuadro_cont2" style="display: none;">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<footer class="footer">
+		<div class="top_footer ">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<ul class="top_foo">
+							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
+							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
+							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="back_footer">
+			<div class="container">
+				<div class="row mb0">
+					<div class="col s12 bottom_foot">
+						<div class="col s12">
+							<p>Para mayores informes de comisiones, contrataciones y beneficios del producto consultar <a href="http://www.santander.com.mx/" target="_blank" id="Footer:  www.santander.com.mx" analytics-on="click">www.santander.com.mx</a></p>
+						</div>
+						<div class="col s12 right-align">
+							<div class="redes_footer">
+								<a href="https://www.facebook.com/SantanderMex" target="_blank"><img src="img/header/facebook.svg" class="ic_ssrr" id="Footer: Share FB" analytics-on="click"></a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://twitter.com/SantanderMx" target="_blank">
+									<img src="img/header/twitter.svg" class="ic_ssrr" id="Footer: Share TW" analytics-on="click">
+								</a>
+							</div>
+							<div class="redes_footer">
+								<a href="https://www.youtube.com/user/SantanderMex?&amp;ab_channel=SantanderMex" target="_blank">
+									<img src="img/header/youtube.svg" class="ic_ssrr" id="Footer: Share YT" analytics-on="click">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+		<script type="text/javascript" src="js/perfil.js"></script>
+		<script type="text/javascript" src="js/mi_perfil.js"></script>
+	</div>
+</body>
+<script>
+	userdata = JSON.parse(localStorage["userdata"]);		  	
+	$('#not').append(" " + userdata.username);
+
+	function desvincular() {
+		
+		$.post( "http://panel.santandertwist.com.mx/api/update_desvincular",{ 
+			buc_final: userdata.buc_final
+		})
+		.done(function( data ) {
+			console.log(data);
+			Materialize.toast(data.message, 6000,'',function () {
+				localStorage.setItem('username_fb_act',$('#username').val());
+				localStorage.setItem('email_fb_act',$('#email').val());
+				localStorage.setItem('buc_final',userdata.buc_final);
+
+		  		location.href="registro.html";
+			});
+		});
+	}
+
+	function vincular() {
+    	
+        //Android.loginFaceBook(userdata.buc_final);
+        window.location = "otrauri://loginbuc?show_activity_indicator=true&user=" + userdata.buc_final;
+
+    }
+</script>
+</html>

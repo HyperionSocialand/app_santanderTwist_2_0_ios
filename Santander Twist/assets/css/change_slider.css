@@ -1,0 +1,25 @@
+.bx-wrapper {
+    -moz-box-shadow: 0 0 5px #ccc;
+    -webkit-box-shadow: 0 0 0px #fff;
+    box-shadow: 0 0 0px #fff;
+    border: 0px solid #fff;
+    background: #fff;
+}
+
+.bx-wrapper {
+    position: relative;
+    margin-bottom: 0px;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+}
+
+.bx-wrapper .bx-pager {
+    text-align: center;
+    font-size: .85em;
+    font-family: Arial;
+    font-weight: bold;
+    color: #666;
+    padding-top: 0px;
+    display: none;
+}

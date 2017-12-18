@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+
+	<title>Santander Twist</title>
+
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+
+	<div class="main login_main minh100p bg_red_square abs">
+
+		<header class="h_header bo-b-1white">
+			<div class="nav-wrapper" onclick="location.href='login.html'">
+				<ul class="left tab_white">
+					<li><i class="fa fa-chevron-left" ></i> Regresar</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="h50"></div>
+
+		<section id="login">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 mt40">
+						<form method="post" action="" class="form_login form">
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Afiliarse con </p>
+									<div class="cont-radio">
+										<div class="col s6 pad0">
+										    <p>
+										      <input name="group1" onclick="$('#div_client').css('display','block');$('#div_card').css('display','none');type_reg(0);" type="radio" id="test1" class="with-gap" checked />
+										      <label for="test1">Número de cliente</label>
+										    </p>
+										</div>
+										<div class="col s6 pad0">
+											<p>
+										      <input name="group1" onclick="$('#div_client').css('display','none');$('#div_card').css('display','block');type_reg(1);" type="radio" id="test2" class="with-gap" />
+										      <label for="test2">Número de tarjeta de crédito</label>
+										    </p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="div_client">
+									<p class="tit_forms">Número de Cliente</p>
+									<input type="text" name="user" id="numberClient" class="validate">
+								</div>
+							</div>
+							<div class="row" style="display: none;" id="div_card">
+								<div class="input-field col s12">
+									<p class="tit_forms">Número de Tarjeta</p>
+									<input type="text" name="user" id="numberCard" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Usuario</p>
+									<input type="text" name="user" id="username" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Nombre</p>
+									<input type="text" name="user" id="name" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Correo electrónico</p>
+									<input type="text" name="user" id="email" class="validate">
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Contraseña</p>
+									<input type="password" name="user" id="password" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<p class="tit_forms">Confirmar contraseña</p>
+									<input type="password" name="user" id="password_confirmation" class="validate">
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center-align mt40">
+									<p class="suscripciones">
+								      <input type="checkbox" id="test6" />
+								      <label for="test6">Acepto los términos y condiciones de uso y recibir boletines y promociones.</label>
+								    </p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<button class="btn btn_red" type="button" onclick="post_registro();">Regístrate</button>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12 center-align mt40">
+									<p class="tit_forms center-align fs16"><span class="fw300"><a href="login.html">Iniciar sesión</a></span></p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<div class="hide">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src='js/busqueda_header.js'></script>
+	</div>
+</body>
+<script>
+	$(document).ready(function () {
+		localStorage.setItem('type_reg',0);
+
+		var email = localStorage.getItem('email_fb_act');
+		var username = localStorage.getItem('username_fb_act');
+		var buc_final = localStorage.getItem('buc_final');
+
+		if (username) {
+			$("#username").val(username);
+			localStorage.setItem('flag_act',1);
+		}
+		if (email) {
+			$("#email").val(email);
+			localStorage.setItem('flag_act',1);
+		}
+		if (buc_final) {
+			$("#numberClient").val(buc_final);
+			$("#numberClient").css('display','none');
+			localStorage.setItem('flag_act',1);
+		}
+	})
+	
+	function type_reg(val) {
+		localStorage.setItem('type_reg',val)
+	}
+	function post_registro() {
+		var tipo = localStorage.getItem('type_reg');
+		if (tipo == 0) {
+
+			if (localStorage.getItem('flag_act')==1) {
+				console.log(localStorage.getItem('flag_act'));
+				$.post( "http://panel.santandertwist.com.mx/user/register_app_act",{
+			
+				  	username: $("#username").val(),
+				  	numberClient: $("#numberClient").val(),
+					email: $("#email").val(),
+					name: $("#name").val(),
+					password: $("#password").val(),
+					password_confirmation: $("#password_confirmation").val()
+				})
+				.done(function( data ) {
+					Materialize.toast(data.message, 4000);
+				    console.log(data);
+				});
+				//Materialize.toast('entro actualizacion', 4000);
+			}else{
+
+				$.post( "http://panel.santandertwist.com.mx/user/register_app",{
+			
+				  	username: $("#username").val(),
+				  	numberClient: $("#numberClient").val(),
+					email: $("#email").val(),
+					name: $("#name").val(),
+					password: $("#password").val(),
+					password_confirmation: $("#password_confirmation").val()
+				})
+				.done(function( data ) {
+					Materialize.toast(data.message, 4000);
+				    console.log(data);
+				});
+			}
+			
+		}
+		if (tipo == 1) {
+
+			if (localStorage.getItem('flag_act')==1) {
+				$.post( "http://panel.santandertwist.com.mx/user/register_app_act",{
+			
+				  	username: $("#username").val(),
+					numberCard: $("#numberCard").val()!=''?$("#numberCard").val():'',
+					email: $("#email").val(),
+					name: $("#name").val(),
+					password: $("#password").val(),
+					password_confirmation: $("#password_confirmation").val()
+				})
+				.done(function( data ) {
+					Materialize.toast(data.message, 4000);
+				    localStorage.clear();
+			  		location.href="login.html";
+				});
+			}else{
+				$.post( "http://panel.santandertwist.com.mx/user/register_app",{
+			
+				  	username: $("#username").val(),
+					numberCard: $("#numberCard").val()!=''?$("#numberCard").val():'',
+					email: $("#email").val(),
+					name: $("#name").val(),
+					password: $("#password").val(),
+					password_confirmation: $("#password_confirmation").val()
+				})
+				.done(function( data ) {
+					Materialize.toast(data.message, 4000);
+				    localStorage.clear();
+			  		location.href="login.html";
+				});
+			}
+			
+		}		
+	}	
+</script>
+</html>

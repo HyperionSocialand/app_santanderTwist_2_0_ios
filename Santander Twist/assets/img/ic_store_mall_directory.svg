@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch Beta 39 (31443) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_store_mall_directory</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs></defs>
+    <g id="home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Santander_twist_info_comercio" transform="translate(-195.000000, -409.000000)">
+            <g id="ic_store_mall_directory" transform="translate(191.000000, 404.000000)">
+                <polygon id="Bounds" points="0 0 32 0 32 32 0 32"></polygon>
+                <path d="M26.6666667,5.33333333 L5.33333333,5.33333333 L5.33333333,8 L26.6666667,8 L26.6666667,5.33333333 L26.6666667,5.33333333 Z M28,18.6666667 L28,16 L26.6666667,9.33333333 L5.33333333,9.33333333 L4,16 L4,18.6666667 L5.33333333,18.6666667 L5.33333333,26.6666667 L18.6666667,26.6666667 L18.6666667,18.6666667 L24,18.6666667 L24,26.6666667 L26.6666667,26.6666667 L26.6666667,18.6666667 L28,18.6666667 L28,18.6666667 Z M16,24 L8,24 L8,18.6666667 L16,18.6666667 L16,24 L16,24 Z" id="Shape" fill="#C2C2C2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,361 @@
+.select-wrapper input.select-dropdown {
+    border: 1px solid #ec0000;
+    border-radius: 4px;
+    color: #444444;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: center;
+    font: inherit;
+    padding: 0.5em 3.5em 0.5em 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1px 1.5em;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+}
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+.select-wrapper span.caret{
+    display: none;
+}
+.dropdown-content li > a, .dropdown-content li > span{
+	color: #444444;
+	text-transform: uppercase;
+	font-weight: 400;
+}
+h1.tit_miperfil {
+    margin: 0px;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.form .row {
+    margin-bottom: 0px;
+}
+
+.form .row p {
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+.form .row input:not([type=radio]) {
+    border-radius: 5px;
+    padding: 10px 13px;
+    border: solid 1px #c2c2c2;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 2px 0px #ec0000;
+    border-color: #ec0000!important;
+    font-size: 16px;
+}
+.form .row textarea {
+    border-radius: 5px;
+    padding: 5px;
+    border: solid 1px #c2c2c2;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 2px 0px #ec0000;
+    border-color: #ec0000!important;
+    font-size: 16px;
+    height: 10em;
+}
+
+.btn_actualizar {
+    background: #ec0000;
+    border-radius: 100px;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.dv_conect_face img{
+	width: 30px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.dv_conect_face p{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 10px;
+	margin-left: 10px;
+}
+.btn_face {
+    background: #3d5998;
+    margin: 0 auto;
+    display: block;
+}
+.cupon{
+	float: left;
+    box-shadow: 0 0 6px 0 #c2c2c2;
+    display: block;
+    margin-bottom: 3.5%;
+    width: 100%;
+    height: calc(30vw + 105px);
+}
+.cupones .cupon:not(:nth-child(2n)){
+	margin-right: 2%;
+}
+.cupones .cupon:nth-child(2n - 1){
+	margin-top: 20px;
+}
+.cupon .cnt{
+	position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: calc(100% - 105px);
+}
+.cupon .priImgBg{
+	display: block;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-size: cover;
+	background-position: center;
+	z-index: 0;
+}
+.starCont{
+	width: 32px;
+	height: 32px;
+	right: 0px;
+	top: 0px;
+	position: absolute;
+	background-color: #ffffff;
+	border-radius: 50%;
+	z-index: 1;
+	cursor: pointer;
+	text-align: center;
+}
+.starCont img{
+	width: 18px;
+	display: inline-block;
+	margin-top: 9px;
+}
+.cupon .action {
+    height: 105px;
+    padding: 0 4% 0 2.5%;
+}
+.cupon .ssrr {
+    height: 50px;
+    width: 100%;
+    border-right: none;
+    text-align: center;
+}
+.cupon .ssrr *:not(a){
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 10px;
+}
+.btn_red_white {
+    background: white;
+    width: 100%;
+    padding: 0px 3px;
+    border-radius: 30px;
+    border: 1px solid #ec0000;
+    color: #ec0000;
+    letter-spacing: 0px;
+    font-size: 11px;
+    text-transform: inherit;
+}
+.maxCont {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.cuadro_bor_red {
+    border: 2px solid #ec0000;
+    text-align: center;
+    padding: 10px;
+}
+
+.cuadro_bor_red h2 {
+    font-size: 6vw;
+    font-weight: normal;
+}
+.tab_p_cont ul::after{
+	clear: both;
+    font-size: 0px;
+    line-height: 0px;
+    display: block;
+	content: "";
+}
+.tab_p_cont ul li {
+    width: 50%;
+    float: left;
+    background: #FAFAFA;
+    padding: 10px 0px;
+    line-height: 14px;
+    text-align: center;
+}
+.tab_p_cont ul li.active {
+	background: #4D4D4D;
+	color: white;
+}
+.cuadro_cont img{
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+}
+p.precio_p {
+    font-size: 14px;
+    font-weight: 500;
+}
+.section_perfil{
+	display: none;
+}
+h2.sub_tit_contacto {
+    font-size: 23px;
+    color: #ec0000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.login_main{
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+}
+.bg_red_square{
+    background: url(../img/img_back02.jpg) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    background-color: #ec0000; 
+}
+.tit_forms{
+    font-size: 12px;
+    color: white;
+    margin-bottom: 10px
+    margin-top: 0px;
+    font-weight: 500;
+}
+.tit_forms span{
+    font-weight: 300;
+}
+.tit_forms a{
+    text-decoration: underline;
+}
+button[type="submit"].btn_red,button[type="button"].btn_red {
+    width: 100%;
+    background: #ec0000;
+    border-radius: 20px;
+}
+.bo-b-1white{
+    border-bottom: 1px solid white;
+}
+.tab_white li{
+    color: white;
+}
+.tab_white li i{
+    display: inline-block;
+    vertical-align: middle;
+}
+.cont-radio label {
+    margin-bottom: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    margin-left: 5px;
+}
+.cont-radio input[type="radio"]{
+    display: inline-block;
+    vertical-align: middle;
+}
+.suscripciones label{
+    color: white;
+}
+[type="checkbox"] + label:before, [type="checkbox"]:not(.filled-in) + label:after{
+    top: 15px;
+    border: 2px solid white;
+}
+[type="checkbox"]:checked + label:before{
+    top: 10px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+
+}
+[type="radio"]:not(:checked) + label:before, [type="radio"]:not(:checked) + label:after{
+    border-color: white;
+    margin: 0px;
+}
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after{
+    border-color: white;
+    margin: 0px;
+}
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after{
+    background: white;
+}
+.cont-radio label {
+    height: auto !important;
+    padding-left: 25px !important;
+    font-size: 12px !important;
+    line-height: 15px !important;
+}
+.cont_gris {
+    width: 100%;
+    display: block;
+    background: #d2d2d2;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.cont_gris p {
+    font-weight: 500;
+    font-size: 14px;
+}
+.bor_gris{
+    box-shadow: 0px 0px 2px 0px #d2d2d2;
+    border-color: #d2d2d2!important;
+}
+.btn_gray_red {
+    width: 100%;
+    background: white;
+    color: #ec0000;
+    border: 1px solid #d2d2d2;
+    border-radius: 50px;
+}
+.tit_over {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+    background: rgba(0,0,0,0.4);
+}
+.tit_over div {
+    position: absolute;
+    bottom: 5px;
+    width: 96%;
+    left: 2%;
+}
+
+.tit_over div h2 {
+    color: white;
+    font-size: 14px;
+    margin: 0px;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.tit_over div p {
+    color: white;
+    font-size: 10px;
+    margin: 0px;
+    white-space: nowrap;
+    width: 12em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 300;
+}
