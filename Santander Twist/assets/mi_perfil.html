@@ -235,13 +235,13 @@
 							<div class="row" id="pass_new">
 								<div class="input-field col s12 left-align">
 									<p>Contraseña nueva</p>
-									<input type="password" name="" class="validate">
+									<input type="password" id="pass" name="" class="validate">
 								</div>
 							</div>
 							<div class="row" id="pas_conf">
 								<div class="input-field col s12 left-align">
 									<p>Confirmar contraseña</p>
-									<input type="password" name="" class="validate">
+									<input type="password" id="pass_con" name="" class="validate">
 								</div>
 							</div>
 							<div class="row">
@@ -337,10 +337,10 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
-							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
-							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
-							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
+							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
+							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -388,27 +388,48 @@
 	$('#not').append(" " + userdata.username);
 
 	function desvincular() {
-		
+		console.log('desvincular');
 		$.post( "http://panel.santandertwist.com.mx/api/update_desvincular",{ 
 			buc_final: userdata.buc_final
 		})
 		.done(function( data ) {
-			console.log(data);
-			Materialize.toast(data.message, 6000,'',function () {
+			console.log('data : ' + data);
+			if (data.code==200) {
+				//console.log(data);
+				Materialize.toast(data.message, 6000);
 				localStorage.setItem('username_fb_act',$('#username').val());
 				localStorage.setItem('email_fb_act',$('#email').val());
 				localStorage.setItem('buc_final',userdata.buc_final);
 
-		  		location.href="registro.html";
-			});
+			  	location.href="registro.html";
+			}
+			if (data.code==101) {
+				
+				Materialize.toast(data.message, 6000);
+				localStorage.setItem('username_fb_act',$('#username').val());
+				localStorage.setItem('email_fb_act',$('#email').val());
+				localStorage.setItem('buc_final',userdata.buc_final);
+				userdata.fbdata = 1;
+			  	location.href="mi_perfil.html";
+			}
+			
 		});
 	}
 
 	function vincular() {
-    	
-        //Android.loginFaceBook(userdata.buc_final);
-        window.location = "otrauri://loginbuc?show_activity_indicator=true&user=" + userdata.buc_final;
-
+       // Android.loginFaceBook(userdata.buc_final);
+       window.location = "otrauri://loginbuc?show_activity_indicator=true&user=" + userdata.buc_final;
     }
 </script>
+
+<script type="text/javascript">
+	function tarjeta() {
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+	}
+	
+	function oprimir_back(){
+		window.history.back();
+	}
+</script>	
 </html>

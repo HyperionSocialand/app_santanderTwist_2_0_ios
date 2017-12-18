@@ -10,8 +10,8 @@
 		38120CE91FD9AA3100C2EB00 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38120CE61FD9AA3000C2EB00 /* FBSDKCoreKit.framework */; };
 		38120CEA1FD9AA3100C2EB00 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38120CE71FD9AA3000C2EB00 /* Bolts.framework */; };
 		38120CEB1FD9AA3100C2EB00 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38120CE81FD9AA3000C2EB00 /* FBSDKLoginKit.framework */; };
+		381C48FD1FE875FC0073D6F1 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 381C48FC1FE875FC0073D6F1 /* assets */; };
 		384E047B1FE027C000ADE860 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384E047A1FE027BF00ADE860 /* Social.framework */; };
-		387A9CA41FE6E2CC001D55B4 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 387A9CA31FE6E2CC001D55B4 /* assets */; };
 		387E28461FDEE87800202463 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387E28451FDEE87800202463 /* CoreLocation.framework */; };
 		38CEAF351FD8B495007CD427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEAF341FD8B495007CD427 /* AppDelegate.swift */; };
 		38CEAF371FD8B495007CD427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEAF361FD8B495007CD427 /* ViewController.swift */; };
@@ -46,8 +46,8 @@
 		38120CE61FD9AA3000C2EB00 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		38120CE71FD9AA3000C2EB00 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		38120CE81FD9AA3000C2EB00 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		381C48FC1FE875FC0073D6F1 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		384E047A1FE027BF00ADE860 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		387A9CA31FE6E2CC001D55B4 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		387E28451FDEE87800202463 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		38CEAF311FD8B495007CD427 /* Santander Twist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Santander Twist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CEAF341FD8B495007CD427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				38CEAF361FD8B495007CD427 /* ViewController.swift */,
 				38CEAF381FD8B495007CD427 /* Main.storyboard */,
 				38CEAF3E1FD8B495007CD427 /* Assets.xcassets */,
-				387A9CA31FE6E2CC001D55B4 /* assets */,
+				381C48FC1FE875FC0073D6F1 /* assets */,
 				38CEAF401FD8B495007CD427 /* LaunchScreen.storyboard */,
 				38CEAF431FD8B495007CD427 /* Info.plist */,
 				38CEAF3B1FD8B495007CD427 /* Santander_Twist.xcdatamodeld */,
@@ -274,7 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38CEAF421FD8B495007CD427 /* LaunchScreen.storyboard in Resources */,
-				387A9CA41FE6E2CC001D55B4 /* assets in Resources */,
+				381C48FD1FE875FC0073D6F1 /* assets in Resources */,
 				38CEAF3F1FD8B495007CD427 /* Assets.xcassets in Resources */,
 				38CEAF3A1FD8B495007CD427 /* Main.storyboard in Resources */,
 			);

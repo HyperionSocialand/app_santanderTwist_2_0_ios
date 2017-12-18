@@ -133,9 +133,8 @@
 			.done(function( data ) {
 				console.log(data);
 				if (data.code==200) {
-					Materialize.toast(data.code + ' ' +data.message, 2000, '',function () {
-	      				login();
-	      			});	
+					Materialize.toast(data.code + ' ' +data.message, 2000);	
+	      			login();
 				}else if (data.code==403){
 					Materialize.toast(data.code + ' ' +data.message, 2000);
 				}
@@ -154,9 +153,8 @@
 			.done(function( data ) {
 				console.log(data);
 				if (data.code==200) {
-					Materialize.toast(data.code + ' ' +data.message, 2000, '',function () {
-	      				login();
-	      			});	
+					Materialize.toast(data.code + ' ' +data.message, 2000);	
+	      			login();
 				}else if (data.code==403){
 					Materialize.toast(data.code + ' ' +data.message, 2000);	
 				}
@@ -181,9 +179,8 @@
       		if (data.code==200) { 
       			localStorage["userdata"] = JSON.stringify(data.userdata);  
       			$("#cargador").hide();   			
-      			Materialize.toast(data.message, 2000, '',function () {
-      				window.location="index.html";
-      			});
+      			Materialize.toast(data.message, 2000);
+      			window.location="index.html";
       		}
     	});
 	}
@@ -191,6 +188,11 @@
 	function oprimir_back(){
 		localStorage.clear();
     	window.history.back();
+   }
+
+   function redirect_login() {
+   		window.localStorage.clear();
+   		location.href='login.html';
    }
 </script>
 </html>

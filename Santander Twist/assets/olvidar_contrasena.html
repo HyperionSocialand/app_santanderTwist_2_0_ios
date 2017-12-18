@@ -37,16 +37,16 @@
 								</div>
 							</div>
 						</div>
-						<form method="post" action="" class="form">
+						<form method="post" class="form">
 							<div class="row">
 								<div class="input-field col s12">
 									<p class="tit_forms black-text">Correo Eéctronico</p>
-									<input type="text" name="user" class="validate bor_gris">
+									<input type="text" id="email" name="user" class="validate bor_gris">
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
-									<button class="btn btn_gray_red">Siguiente</button>
+									<a class="btn btn_gray_red" onclick="send_email()">Siguiente</a>
 								</div>
 							</div>
 						</form>
@@ -63,5 +63,21 @@
 		<script type="text/javascript" src="js/global.js"></script>
 		<script type="text/javascript" src='js/busqueda_header.js'></script>
 	</div>
+<script type="text/javascript">
+	function oprimir_back(){
+		window.history.back();
+	}
+</script>	
 </body>
+<script>
+	function send_email() {
+		$.post( "http://panel.santandertwist.com.mx/user/send_mail_reset_psswd",{ 
+			email: $("#email").val()
+		})
+		.done(function( data ) {
+			console.log('data : ' + data);	
+			Materialize.toast(data.message, 6000);		
+		});
+	}
+</script>
 </html>

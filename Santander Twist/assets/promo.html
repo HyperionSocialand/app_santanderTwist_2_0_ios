@@ -341,10 +341,10 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
-							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
-							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
-							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
+							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
+							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -562,10 +562,6 @@
   </script>
 
   <script type="text/javascript">
-    function oprimir_back(){
-      window.history.back();
-    }
-
   function load_estadoss() {
   	$.get( "http://panel.santandertwist.com.mx/api/get_states",{
   		
@@ -614,6 +610,16 @@
           window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
 	  }
   </script>
+<script type="text/javascript">
+	function tarjeta() {
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+	}
+	
+	function oprimir_back(){
+		window.history.back();
+	}
+</script>
 	</div>
 </body>
 </html>

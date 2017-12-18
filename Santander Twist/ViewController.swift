@@ -50,7 +50,7 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
         }else if faceLog == 2{
             // Code 202
             let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-            let url2 = NSURL(string: "?slug=fb&qidFacebook=\(idface!)&userName=\    (nameface!)&email=\(emailface!)",relativeTo: url1)!
+            let url2 = NSURL(string: "?slug=fb&qidFacebook=\(idface!)&userName=\(nameface!)&email=\(emailface!)",relativeTo: url1)!
             let request = NSURLRequest(url: url2 as URL)
             
             self.webView.loadRequest(request as URLRequest)

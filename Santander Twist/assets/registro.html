@@ -21,7 +21,7 @@
 	<div class="main login_main minh100p bg_red_square abs">
 
 		<header class="h_header bo-b-1white">
-			<div class="nav-wrapper" onclick="location.href='login.html'">
+			<div class="nav-wrapper" onclick="window.localStorage.clear();location.href='login.html';">
 				<ul class="left tab_white">
 					<li><i class="fa fa-chevron-left" ></i> Regresar</li>
 				</ul>
@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="col s12 mt40">
 						<form method="post" action="" class="form_login form">
-							<div class="row">
+							<div class="row" id="radios_">
 								<div class="input-field col s12">
 									<p class="tit_forms">Afiliarse con </p>
 									<div class="cont-radio">
@@ -56,7 +56,7 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s12" id="div_client">
-									<p class="tit_forms">Número de Cliente</p>
+									<p id="p_num_client" class="tit_forms">Número de Cliente</p>
 									<input type="text" name="user" id="numberClient" class="validate">
 								</div>
 							</div>
@@ -112,7 +112,7 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s12 center-align mt40">
-									<p class="tit_forms center-align fs16"><span class="fw300"><a href="login.html">Iniciar sesión</a></span></p>
+									<p class="tit_forms center-align fs16"><span class="fw300"><a onclick="window.location.href='login.html';">Iniciar sesión</a></span></p>
 								</div>
 							</div>
 						</form>
@@ -138,10 +138,7 @@
 		var username = localStorage.getItem('username_fb_act');
 		var buc_final = localStorage.getItem('buc_final');
 
-		if (username) {
-			$("#username").val(username);
-			localStorage.setItem('flag_act',1);
-		}
+		
 		if (email) {
 			$("#email").val(email);
 			localStorage.setItem('flag_act',1);
@@ -149,6 +146,8 @@
 		if (buc_final) {
 			$("#numberClient").val(buc_final);
 			$("#numberClient").css('display','none');
+			$("#radios_").css('display','none');
+			$("#p_num_client").css('display','none');
 			localStorage.setItem('flag_act',1);
 		}
 	})
@@ -173,7 +172,7 @@
 				})
 				.done(function( data ) {
 					Materialize.toast(data.message, 4000);
-				    console.log(data);
+				    window.location.href="login.html";
 				});
 				//Materialize.toast('entro actualizacion', 4000);
 			}else{
@@ -189,7 +188,7 @@
 				})
 				.done(function( data ) {
 					Materialize.toast(data.message, 4000);
-				    console.log(data);
+				    window.location.href="login.html";
 				});
 			}
 			
@@ -209,7 +208,7 @@
 				.done(function( data ) {
 					Materialize.toast(data.message, 4000);
 				    localStorage.clear();
-			  		location.href="login.html";
+			  		window.location.href="login.html";
 				});
 			}else{
 				$.post( "http://panel.santandertwist.com.mx/user/register_app",{
@@ -224,11 +223,17 @@
 				.done(function( data ) {
 					Materialize.toast(data.message, 4000);
 				    localStorage.clear();
-			  		location.href="login.html";
+			  		window.location.href="login.html";
 				});
 			}
 			
 		}		
 	}	
+</script>
+
+<script type="text/javascript">
+	function oprimir_back(){
+		window.history.back();
+	}
 </script>
 </html>

@@ -40,6 +40,7 @@
 	}
 
 	function send_form_insert() {
+		if (validate_form())
 		$.post( "http://panel.santandertwist.com.mx/api/insert_profile",{
 			username:userdata.username,
 			nombre:$('#nombre').val(),
@@ -49,22 +50,75 @@
 			email:$('#email').val()
 		})
 		.done(function( data ) {
-			Materialize.toast(data.message, 2000);
+			Materialize.toast(data.message, 6000);
+			if (data.code==200) {
+				location.reload();
+			}
 		});
 	}
 
 	function send_form_actu() {
+		if (validate_form())
 		$.post( "http://panel.santandertwist.com.mx/api/update_profile",{
 			username:userdata.username,
 			nombre:$('#nombre').val(),
 			a_paterno:$('#a_paterno').val(),
 			a_materno:$('#a_materno').val(),
 			buc_final:userdata.buc_final,
-			email:$('#email').val()
+			email:$('#email').val(),
+			pass:$('#pass').val(),
+			pass_con:$('#pass_con').val()
 		})
 		.done(function( data ) {
-			Materialize.toast(data.message, 2000);
+			console.log(data);
+			Materialize.toast(data.message, 6000);
+			if (data.code==200) {
+				location.reload();
+			}
+			if (data.code==201) {
+				window.localStorage.clear();
+				window.location.href = "login.html";
+			}
+			
 		});
+	}
+
+	function validate_form() {
+		if( $("#nombre").val().length < 1){
+			Materialize.toast("El campo nombre es obligatorio.", 2000);
+			return false;					
+		}
+
+		if( $("#nombre").val().length < 1){
+			Materialize.toast("El campo nombre es obligatorio.", 2000);
+			return false;					
+		}
+
+		if( $("#a_paterno").val().length < 1){
+			Materialize.toast("El campo apellido paterno es obligatorio.", 2000);
+			return false;					
+		}
+
+		if( $("#a_materno").val().length < 1){
+			Materialize.toast("El campo apellido materno es obligatorio.", 2000);
+			return false;					
+		}
+
+		if( $("#email").val().length < 1){
+			Materialize.toast("El campo email es obligatorio.", 2000);
+			return false;					
+		}
+
+		if ( $("#pass").val() < 1 ) {
+
+		} else {
+			if( $("#pass").val() != $("#pass_con").val() ){
+				Materialize.toast("Las contraseñas no coinciden.", 2000);
+				return false;					
+			}	
+		}
+		
+		return true;
 	}
 
 	function load_active() {		

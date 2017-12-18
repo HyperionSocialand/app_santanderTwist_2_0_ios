@@ -199,7 +199,7 @@
 	<div class="main minh200">
 		<section>
 			<div class="pos_relative">
-				<div class="slider" id="sl_banner">
+				<div class="slider_dos" id="sl_banner">
 				</div>
 			</div>
 		</section>
@@ -312,10 +312,10 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="/"><img src="img/header/logo-twist.svg"></a></li>
-							<li><a href="#content-terminos" class="fancybox"><span>Información general</span></a></li>
-							<li><a href="https://servicios.santander.com.mx/tarjetas/tarjetas/index.html" target="_blank"><span>Tarjetas de crédito</span></a></li>
-							<li><a href="https://1.santandertwist.com.mx/contacto.php" target="_blank"><span>Contáctanos</span></a></li>
+							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
+							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
+							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -379,7 +379,10 @@
 		    		var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://santandertwist.com.mx');
 		    		html += '<div><img onclick="redirect_banner(\'' + value.banner_url + '\');" src="' + str + '"></div>';
 		    	})
-		    	$('#sl_banner').html(html);     		
+		    	$('#sl_banner').html(html);
+		    	$('.slider_dos').bxSlider({
+					auto: true  
+				});  
 		    });
 		  }
 
@@ -390,7 +393,7 @@
 		    	console.log(data);	 
 		    	var html = ''; 
 		    	$.each(data, function (key,value) {
-		    		html += '<div><img onclick="redirect_banner(\'' + value.url + '\');" src="https://santandertwist.com.mx' + value.carousel_plus_banner + '"></div>';
+		    		html += '<div><img onclick="redirect_banner(\'' + value.url + '\');" src="https://uploads.santandertwist.com.mx' + value.carousel_plus_banner + '"></div>';
 		    	})
 		    	$('#sl_tickets').html(html); 
 		    	$('.slider').bxSlider({
@@ -415,7 +418,7 @@
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.link+'\')">';
 									html += '<div class="imagen-over">';
-										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
@@ -457,7 +460,7 @@
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
 									html += '<div class="imagen-over">';
-										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
@@ -499,7 +502,7 @@
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
 									html += '<div class="imagen-over">';
-										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
@@ -537,6 +540,16 @@
 		  	window.location = liga;
 		  }
 		</script>
+<script type="text/javascript">
+	function tarjeta() {
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+	}
+	
+	function oprimir_back(){
+		window.history.back();
+	}
+</script>	
 	</div>
 </body>
 </html>
