@@ -93,6 +93,7 @@
 </body>
 <script>
 	$(document).ready(function () {
+        //alert("HOLA JOTOS");
 		getQueryVariable();
 		localStorage.setItem('type_reg',0);		
 		//Android.console_view('Datos: ' + window.location.href);
@@ -101,13 +102,15 @@
 	function getQueryVariable() {
 	   var query = decodeURI(window.location.search.substring(1));
 	   var vars = query.split("&");
-	   var id_fb = vars[0].split("=");
-	   var username = vars[1].split("=");
-	   var email_fb = vars[2].split("=");
+	   var id_fb = vars[1].split("=");
+	   var username = vars[2].split("=");
+	   var email_fb = vars[3].split("=");
+       
 	   //var fb_data = [id_fb[1],username[1]];
-	   localStorage.setItem('fb_username',username[1]);
+	   localStorage.setItem('fb_username',username[1]));
 	   localStorage.setItem('fb_id',id_fb[1]);
 	   localStorage.setItem('email_fb',email_fb[1]);
+       
 	}
 
 	

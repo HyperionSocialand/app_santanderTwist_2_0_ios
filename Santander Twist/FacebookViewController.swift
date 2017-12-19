@@ -17,7 +17,6 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
 
     var info = ""
     var informacion = ""
-    var Array:[String: String] = [String: String]()
     var BUC = ""
 
     override func viewDidLoad() {
@@ -76,7 +75,7 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
     func cargarOtro(dato: [String: AnyObject]){
         var dato_ = String(describing: dato)
         dato_ = dato_.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let u = "http://panel.santandertwist.com.mx/user/post_login_fb?ios=true&buc=%22%22&data=\(dato_)"
+        let u = "http://panel.santandertwist.com.mx/user/post_login_fb?ios=true&buc=\(self.BUC)&data=\(dato_)"
         print(u)
         let url = URL(string: u)
         let session = URLSession.shared // or let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -95,12 +94,14 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
                 do{
                     if let jsonResult = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers){
                         
-                        self.Array = jsonResult as! NSDictionary as! [String : String]
+                        print("JSON: \(jsonResult)")
+                        let Array:NSDictionary = jsonResult as! NSDictionary
+                        print("Array: \(Array)")
                         
                         DispatchQueue.main.async(execute: {
                             
-                            let code = Int(self.Array["code"]!)
-                            
+                            let code = Array["code"] as! Int
+                           // let code = 0
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "principal") as! ViewController
                             if(code == 101){
                                 vc.faceLog = 1
@@ -108,15 +109,15 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
                                 
                             }else if(code == 403){
                                 vc.faceLog = 3
-                                vc.nameface = String(describing: dato["name"])
-                                vc.idface = String(describing: dato["id"])
-                                vc.emailface = String(describing: dato["email"])
+                                vc.nameface = dato["name"] as! String
+                                vc.idface = dato["id"] as! String
+                                vc.emailface = dato["email"] as! String
                                 
                             }else if(code == 200){
                                 vc.faceLog = 2
-                                vc.nameface = String(describing: dato["name"])
-                                vc.idface = String(describing: dato["id"])
-                                vc.emailface = String(describing: dato["email"])
+                                vc.nameface = dato["name"] as! String
+                                vc.idface = dato["id"] as! String
+                                vc.emailface = dato["email"] as! String
                             }
                             
                             self.present(vc, animated: false, completion: nil)

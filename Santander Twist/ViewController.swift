@@ -15,10 +15,10 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
 
     @IBOutlet weak var webView: UIWebView!
     var faceLog:Int = 0
-    var idface:String?
-    var nameface:String?
-    var emailface:String?
-    var BUC:String?
+    var idface:String = ""
+    var nameface:String = ""
+    var emailface:String = ""
+    var BUC:String = ""
     var x_pos:Bool = true
     var lat:String?
     var long:String?
@@ -48,7 +48,7 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
         } else if faceLog == 1{
             // Code 101
             let url1 = Bundle.main.url(forResource: "mi_perfil", withExtension: "html", subdirectory: "assets")!
-            let url2 = NSURL(string: "?buc=\(BUC!)",relativeTo: url1)!
+            let url2 = NSURL(string: "?buc=\(BUC.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)",relativeTo: url1)!
             let request = NSURLRequest(url: url2 as URL)
             
             self.webView.loadRequest(request as URLRequest)
@@ -56,15 +56,19 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
         }else if faceLog == 2{
             // Code 202
             let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
-            let url2 = NSURL(string: "?slug=fb&qidFacebook=\(idface!)&userName=\(nameface!)&email=\(emailface!)",relativeTo: url1)!
+            let url2 = NSURL(string: "?slug=fb&qidFacebook=\(idface.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&userName=\(nameface.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&email=\(emailface		)",relativeTo: url1)!
             let request = NSURLRequest(url: url2 as URL)
             
             self.webView.loadRequest(request as URLRequest)
         }else if faceLog == 3{
             // Code 403
             let url1 = Bundle.main.url(forResource: "registro_face", withExtension: "html", subdirectory: "assets")!
-            let url2 = NSURL(string: "?slug=fb&qidFacebook=\(idface!)&userName=\(nameface!)&email=\(emailface!)",relativeTo: url1)!
+            let str_ur = "?slug=fb&qidFacebook=\(idface.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&userName=\(nameface.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&email=\(emailface)"
+           // print(str_ur)
+            let url2 = NSURL(string: str_ur,relativeTo: url1)!
             let request = NSURLRequest(url: url2 as URL)
+            
+            self.webView.loadRequest(request as URLRequest)
         }
         
     }
@@ -169,6 +173,15 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
         
         if(_req.contains("loginbuc")){
             
+            var pl:String?
+            for variable in variables{
+                let array = variable.components(separatedBy: "=")
+                pl = String(array[1])
+            }
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "face") as! FacebookViewController
+            vc.BUC = pl!
+            self.present(vc, animated: false, completion: nil)
         }
         
         return true;
