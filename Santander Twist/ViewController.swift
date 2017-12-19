@@ -47,6 +47,12 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
             webView.loadRequest(request as URLRequest)
         } else if faceLog == 1{
             // Code 101
+            let url1 = Bundle.main.url(forResource: "mi_perfil", withExtension: "html", subdirectory: "assets")!
+            let url2 = NSURL(string: "?buc=\(BUC!)",relativeTo: url1)!
+            let request = NSURLRequest(url: url2 as URL)
+            
+            self.webView.loadRequest(request as URLRequest)
+            
         }else if faceLog == 2{
             // Code 202
             let url1 = Bundle.main.url(forResource: "index", withExtension: "html", subdirectory: "assets")!
