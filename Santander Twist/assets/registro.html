@@ -57,13 +57,13 @@
 							<div class="row">
 								<div class="input-field col s12" id="div_client">
 									<p id="p_num_client" class="tit_forms">Número de Cliente</p>
-									<input type="text" name="user" id="numberClient" class="validate">
+									<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="0" max="99999999" maxlength="8" name="user" id="numberClient" class="validate quantity">
 								</div>
 							</div>
 							<div class="row" style="display: none;" id="div_card">
 								<div class="input-field col s12">
 									<p class="tit_forms">Número de Tarjeta</p>
-									<input type="text" name="user" id="numberCard" class="validate">
+									<input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="0" max="9999999999999999" maxlength='16' name="user" id="numberCard" class="validate quantity">
 								</div>
 							</div>
 							<div class="row">
@@ -131,6 +131,33 @@
 	</div>
 </body>
 <script>
+	var inputQuantity = [];
+    $(function() {
+      $(".quantity").each(function(i) {
+        inputQuantity[i]=this.defaultValue;
+         $(this).data("idx",i); // Guarda el index para regresar despues 
+      });
+      $(".quantity").on("keyup", function (e) {
+        	var $field = $(this),
+            val=this.value,
+            $thisIndex=parseInt($field.data("idx"),10); // regresa el index
+            var check = $field.is(":invalid");
+            if (check) {
+            	Materialize.toast('Maximo ' + $field[0]['maxLength'] + ' digitos', 4000);
+            }
+        if (this.validity && this.validity.badInput || isNaN(val) || $field.is(":invalid") ) {
+            this.value = inputQuantity[$thisIndex];
+            return;
+        } 
+        if (val.length > Number($field.attr("maxlength"))) {
+          val=val.slice(0, 5);
+          $field.val(val);
+        }
+        inputQuantity[$thisIndex]=val;
+      });      
+    });
+</script>
+<script>
 	$(document).ready(function () {
 		localStorage.setItem('type_reg',0);
 
@@ -171,8 +198,13 @@
 					password_confirmation: $("#password_confirmation").val()
 				})
 				.done(function( data ) {
-					Materialize.toast(data.message, 4000);
-				    window.location.href="login.html";
+					if (data.code == 403) {
+						Materialize.toast(data.message, 6000);
+					}
+					if (data.code == 200) {
+						Materialize.toast(data.message, 6000);	
+						window.location.href="login.html";
+					}
 				});
 				//Materialize.toast('entro actualizacion', 4000);
 			}else{
@@ -187,8 +219,13 @@
 					password_confirmation: $("#password_confirmation").val()
 				})
 				.done(function( data ) {
-					Materialize.toast(data.message, 4000);
-				    window.location.href="login.html";
+					if (data.code == 403) {
+						Materialize.toast(data.message, 6000);
+					}
+					if (data.code == 200) {
+						Materialize.toast(data.message, 6000);	
+						window.location.href="login.html";
+					}
 				});
 			}
 			
@@ -206,9 +243,13 @@
 					password_confirmation: $("#password_confirmation").val()
 				})
 				.done(function( data ) {
-					Materialize.toast(data.message, 4000);
-				    localStorage.clear();
-			  		window.location.href="login.html";
+					if (data.code == 403) {
+						Materialize.toast(data.message, 6000);
+					}
+					if (data.code == 200) {
+						Materialize.toast(data.message, 6000);	
+						window.location.href="login.html";
+					}
 				});
 			}else{
 				$.post( "http://panel.santandertwist.com.mx/user/register_app",{
@@ -221,9 +262,13 @@
 					password_confirmation: $("#password_confirmation").val()
 				})
 				.done(function( data ) {
-					Materialize.toast(data.message, 4000);
-				    localStorage.clear();
-			  		window.location.href="login.html";
+					if (data.code == 403) {
+						Materialize.toast(data.message, 6000);
+					}
+					if (data.code == 200) {
+						Materialize.toast(data.message, 6000);	
+						window.location.href="login.html";
+					}
 				});
 			}
 			

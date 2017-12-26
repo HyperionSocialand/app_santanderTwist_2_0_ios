@@ -22,14 +22,21 @@
 <script type="text/javascript">
 	function posScroll() {
         var height = $(window).height();
+        console.log('altura: ' + height);
 		var scrollTop = $(window).scrollTop();
 
 		if (scrollTop > 730) {
+			console.log(scrollTop);
             $("#ocultas").fadeIn();
         }else{
 			$("#ocultas").fadeOut();
 		}
-		
+
+		if (scrollTop >= 1220) {
+			//load_promos();
+        }
+
+	
     }
 </script>
 </head>
@@ -82,7 +89,12 @@
 				</ul>
 				<ul class="right">
 					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
-					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+					<li>
+						<img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" />
+						<div class="circulo_noti" >
+							<p>0</p>
+						</div>
+					</li>
 				</ul>
 				
 			</div>
@@ -147,23 +159,33 @@
 			<h6>Otros sitios</h6>
 			<ul class="subMenu">
 				<li>
-					<a href="#">Santander</a>
+					<a onclick="otros_sitios('http://www.santander.com.mx')">Santander</a>
 				</li>
 				<li>
-					<a href="#">Recompensas</a>
+					<a  onclick="otros_sitios('https://www.loyaltygateway.com/recompensassantanderrewards/rewards/SignInServlet?bank_id=36621&i18n=es_US')">Recompensas</a>
 				</li>
 				<li>
-					<a href="#">AeroMéxico</a>
+					<a  onclick="otros_sitios('https://www.aeromexico.com/es-mx/promociones/experiencias-santander-aeromexico')">AeroMéxico</a>
 				</li>
 				<li>
-					<a href="#">ViajaCompara</a>
+					<a  onclick="otros_sitios('http://www.viajacompara.com')">ViajaCompara</a>
 				</li>
 				<li>
-					<a href="#">Tiend@</a>
+					<a  onclick="otros_sitios('http://www.tienda.santandertwist.com.mx')">Tiend@</a>
 				</li>
 				<li>
-					<a href="#">
+					<a  onclick="otros_sitios('https://www.fiestarewards.com/es')">
 						Fiesta Rewards
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://santandertwist.com.mx/pagaconpuntos')">
+						Paga con puntos
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://www.tucarrera.mx/')">
+						Tu carrera
 					</a>
 				</li>
 			</ul>
@@ -182,31 +204,11 @@
 	<div id="notificaciones2" class="st">
 		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
 		<div class="cont_noti">
-			<ul>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
+			<ul id="ul_noti">
+				
 			</ul>
 		</div>
 	</div>
-
 	<div class="h29"></div>
 	<div class="header_cat text_center" id="ocultas" style="display: none;">
 		<div class="row-15 bttn_bottom_5 bttn_top_5 m_aling text_center">
@@ -251,7 +253,7 @@
 					<div class="s_5"></div>
 					<img class="img_entretenimiento" src="img/ic_entretenimiento_red.svg"/>
 					<div class="s_5"></div>
-					<p>Entretenimiento</p>
+					<p>Entreteni..</p>
 					<div class="s_5"></div>
 				</div>
 			</div>
@@ -263,7 +265,7 @@
 					<div class="s_5"></div>
 					<img class="img_restaurantes" src="img/ic_restaurantes_red.svg"/>
 					<div class="s_5"></div>
-					<p>Restaurantes</p>
+					<p>Restaurant..</p>
 					<div class="s_5"></div>
 				</div>
 			</div>
@@ -313,7 +315,7 @@
 					<div class="row-100 text_center" id="vista">
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_todas box_active text_center" onclick="load_promos()">
+							<div class="row-100 sec_todas box_active text_center" onclick="load_promos()">
 								<div class="img_active_cat">
 									<div class="s_5"></div>
 									<img class="img_todas" src="img/ic_todas_white.svg"/>
@@ -325,7 +327,7 @@
 						</div>
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_bienestar box_inactive text_center" onclick="load_promos_cat('bienestar')">
+							<div class="row-100 sec_bienestar box_inactive text_center" onclick="load_promos_cat('bienestar')">
 								<div>
 									<div class="s_5"></div>
 									<img class="img_bienestar" src="img/ic_bienestar_red.svg"/> 
@@ -337,7 +339,7 @@
 						</div>
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_compras box_inactive text_center" onclick="load_promos_cat('compras')">
+							<div class="row-100 sec_compras box_inactive text_center" onclick="load_promos_cat('compras')">
 								<div>
 									<div class="s_5"></div>
 									<img class="img_compras" src="img/ic_compras_red.svg"/>
@@ -349,7 +351,7 @@
 						</div>
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_entretenimiento box_inactive text_center" onclick="load_promos_cat('entretenimiento')">
+							<div class="row-100 sec_entretenimiento box_inactive text_center" onclick="load_promos_cat('entretenimiento')">
 								<div>
 									<div class="s_5"></div>
 									<img class="img_entretenimiento" src="img/ic_entretenimiento_red.svg"/>
@@ -361,7 +363,7 @@
 						</div>
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_restaurantes box_inactive text_center" onclick="load_promos_cat('restaurantes')">
+							<div class="row-100 sec_restaurantes box_inactive text_center" onclick="load_promos_cat('restaurantes')">
 								<div>
 									<div class="s_5"></div>
 									<img class="img_restaurantes" src="img/ic_restaurantes_red.svg"/>
@@ -373,7 +375,7 @@
 						</div>
 
 						<div class="row-19 bttn_10 m_aling text_center">
-							<div class="row-90-center sec_viajes box_inactive text_center" onclick="load_promos_cat('viajes')">
+							<div class="row-100 sec_viajes box_inactive text_center" onclick="load_promos_cat('viajes')">
 								<div>
 									<div class="s_5"></div>
 									<img class="img_viajes" src="img/ic_viajes_red.svg"/>
@@ -454,13 +456,25 @@
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script type="text/javascript" src="js/global.js"></script>
 		<script type="text/javascript" src='js/busqueda_header.js'></script>
-		
+
+		<script type="text/javascript">
+		$(window).scroll(function() {
+			for (var i = 0; i < 100000; i++) {
+			    if ($(this).scrollTop() + 200 > $('.carga_' + i).offset().top) {
+			    	
+			        $(".scr_" + i).addClass("fondoN").removeClass("fondoT");
+			    }else{
+			    	$(".scr_" + i).addClass("fondoT").removeClass("fondoN");
+			    }
+			}
+		});
+		</script>
 		
 		<script>
 
-		  var geolocation = {};
 
 		  $(document).ready(function(){
+		  	/*geoLocation();*/
 		  	var query = decodeURI(window.location.search.substring(1));
 		  	var vars = query.split("&");
 		  	var slug_ = vars[0].split("=");
@@ -529,7 +543,6 @@
 					if (data.code==403) {
 						$("#cargador").hide(); 
 						Materialize.toast(data.message, 4000);
-						consoleLog('Lanzara fb_log_sin_pass');
 						
 					}
 					if (data.code==200) {
@@ -549,12 +562,15 @@
 		  	$.post( "http://panel.santandertwist.com.mx/api/active_promos/get20Promos",{
 			})
 		    .done(function( data ) {
+		    	//console.log(data);
 		    	var html = '';
+		    	var x = 0;
 		      	$.each(data, function( index, value ) {
-		      		html += '<div class="col s6">';
+		      		html += '<div class="col s6 carga_' + x + '">';
 						html += '<div class="cupon">';
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+									html += '<div class="scr_' + x + ' fondoT"><div><span>'+value.title+'</span><p>' + value.facebooktext + '</p></div></div>';
 									html += '<div class="imagen-over">';
 										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
@@ -571,6 +587,7 @@
 						html += '</div>';
 					html += '</div>';
 					//alert( index + ": " + value.promo_id );
+					x++;
 				});
 				$('#promos_').html(html);
 				$("#cargador").hide();
@@ -600,9 +617,27 @@
 		    .done(function( data ) {	
 		    		 
 		    	var html = ''; 
+		    	var x = 0;
 		    	$.each(data.banners, function (key,value) {
-		    		var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
-		    		html += '<div><img onclick="redirect_banner(\'' + value.banner_url + '\');" src="' + str + '"></div>';
+		    		var url_split = value.banner_url.split('?');
+		    		var split_pl = value.banner_url.split('/');
+
+		    		//console.log(split_pl[4]);
+
+		    		if (url_split.length == 2) {
+		    			url_split = url_split[1].split('=');
+		    			if (url_split[0] == 'promo') {
+		    				var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
+		    				html += '<div><img onclick="promo_interior(\'' + url_split[1] + '\')" src="' + str + '"></div>';
+		    			}else{
+		    				var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
+		    				html += '<div><img onclick="promo_interior(\'' + split_pl[4] + '\');" src="' + str + '"></div>';
+		    			}		    			
+		    		}else{
+		    			var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
+		    			html += '<div><img onclick="promo_interior(\'' + split_pl[4] + '\');" src="' + str + '"></div>';
+		    		}		    		
+		    		
 		    	})
 		    	$('.slider').html(html);  
 			    $('.slider').bxSlider({
@@ -637,11 +672,13 @@
 		    .done(function( data ) {	
 		    	 
 		    	var html = '';
+		    	var e = 0;
 		      	$.each(data, function( index, value ) {
-		      		html += '<div class="col s6">';
+		      		html += '<div class="col s6 carga_' + e + '">';
 						html += '<div class="cupon">';
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+								html += '<div class="scr_' + e + ' fondoT"><div><span>'+value.title+'</span><p>' + value.facebooktext + '</p></div></div>';
 									html += '<div class="imagen-over">';
 										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
@@ -658,6 +695,7 @@
 						html += '</div>';
 					html += '</div>';
 					//alert( index + ": " + value.promo_id );
+					e++;
 				});
 				$('#promos_').html(html); 
 				$("#cargador").hide();		
@@ -673,11 +711,13 @@
 		    .done(function( data ) {	
 		    	 
 		    	var html = '';
+		    	var o = 0;
 		      	$.each(data.promo_by_state, function( index, value ) {
-		      		html += '<div class="col s6">';
+		      		html += '<div class="col s6 carga_' + o + '">';
 						html += '<div class="cupon">';
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+								html += '<div class="scr_' + o + ' fondoT"><div><span>'+value.title+'</span><p>' + value.facebooktext + '</p></div></div>';
 									html += '<div class="imagen-over">';
 										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
@@ -694,6 +734,7 @@
 						html += '</div>';
 					html += '</div>';
 					//alert( index + ": " + value.promo_id );
+					o++;
 				});
 				$('#promos_').html(html);
 				$("#cargador").hide();
@@ -703,17 +744,18 @@
 		  function load_promos_cerca() {
 		  	reactivar_todas();
 			$("#cargador").show();
-		  	$.get( "http://panel.santandertwist.com.mx/api/get_cerca_de_mi",{
-		  		
+		  	$.get( "http://panel.santandertwist.com.mx/api/get_cerca_de_mi?lat=" + localStorage.getItem('lat') + '&long=' + localStorage.getItem('long'),{
 			})
 		    .done(function( data ) {	
 		    	 
 		    	var html = '';
+		    	var w = 0;
 		      	$.each(data.promos, function( index, value ) {
-		      		html += '<div class="col s6">';
+		      		html += '<div class="col s6 carga_' + w + '">';
 						html += '<div class="cupon">';
 							html += '<div class="cnt">';
 								html += '<a onclick="promo_interior(\''+value.slug+'\')">';
+								html += '<div class="scr_' + w + ' fondoT"><div><span>'+value.title+'</span><p>' + value.facebooktext + '</p></div></div>';
 									html += '<div class="imagen-over">';
 										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
@@ -730,6 +772,7 @@
 						html += '</div>';
 					html += '</div>';
 					//alert( index + ": " + value.promo_id );
+					w++;
 				});
 				$('#promos_').html(html);
 				$("#cargador").hide();
@@ -738,10 +781,7 @@
 
 		  
 
-		  function promo_interior(slug) {
-		  	localStorage.setItem("promo_interior", slug);
-		  	window.location = "promo.html";
-		  }
+		  
 
 		  function redirect_banner(liga) {
 		  	localStorage.setItem("redirect_banner", liga);
@@ -751,11 +791,9 @@
 		  
 		</script>
 		<script type="text/javascript">
-			function geoLocation() {
-				//Android.GeoLoca();
-                window.location = "otrauri://geoloca?show_activity_indicator=true";
-
-			}
+			/*function geoLocation() {
+				Android.GeoLoca();
+			}*/
 			
 			function wp(pl) {
                // Android.whatsapp(pl);
@@ -768,13 +806,13 @@
             }
 			
 			function fb(ti,pl) {
-              //  Android.facebook(ti,pl);
-              window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
+                //Android.facebook(ti,pl);
+                window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
             }
 			
 			function cacheClean() {
-               // Android.chacheRemove();
-               window.location = "otrauri://chacheRemove?show_activity_indicator=true";
+                //Android.chacheRemove();
+                window.location = "otrauri://chacheRemove?show_activity_indicator=true";
             }
 			
 			function consoleLog(view) {
@@ -783,9 +821,18 @@
             }
 			
 			function tarjeta() {
-                //Android.tarjetasbanco();
-                window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+               // Android.tarjetasbanco();
+               window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
             }
+
+            function oprimir_back(){
+				window.history.back();
+			}
+
+			function otros_sitios(url_go) {
+				//Android.go_otros_sitios(url_go);
+                window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
+			}
 		</script>
 	</div>
 </body>

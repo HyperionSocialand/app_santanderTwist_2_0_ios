@@ -11,31 +11,37 @@ p{
 .row-90-center{
     width: 90%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .row-99-center{
     width: 99%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .row-80-center{
     width: 80%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .row-70-center{
     width: 70%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .row-50-center{
     width: 50%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .row-20-center{
     width: 20%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 
@@ -386,7 +392,7 @@ select:-moz-focusring {
 
 .box_inactive p{
     color: #ec0000;
-    font-size: 5px;
+    font-size: 5px !important;
 }
 
 .bttn_10{
@@ -594,4 +600,90 @@ div.cntR {
 
 .txt_meddil img {
     width: 40% !important;
+}
+
+.fondoN{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    left: 0;
+    z-index: 10;
+    bottom: 0px;
+}
+
+.fondoN div {
+    position: absolute;
+    bottom: 5px;
+    left: 5%;
+    width: 90%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.fondoN div span{
+    color: #fff;
+    font-size: 11px;
+}
+
+.fondoN div p{
+    text-shadow: 1px 2px 1px #000000;
+    width:100%;
+    height:16px;
+    overflow:hidden;
+    word-wrap:break-word;
+    padding-right:10px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color: #fff;
+    font-size: 11px;
+}
+
+.fondoT{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    left: 0;
+    z-index: 10;
+    bottom: 0px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.fondoT div {
+    position: absolute;
+    bottom: -16px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    left: 5%;
+    width: 90%;
+}
+
+.fondoT div span{
+    color: #fff;
+    font-size: 11px;
+    text-shadow: 1px 2px 1px #000000;
+}
+
+.fondoT div p{
+    text-shadow: 1px 2px 1px #000000;
+    width:100%;
+    height:16px;
+    overflow:hidden;
+    word-wrap:break-word;
+    padding-right:10px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color: #fff;
+    font-size: 11px;
 }

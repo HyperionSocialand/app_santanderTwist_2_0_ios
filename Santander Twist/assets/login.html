@@ -8,10 +8,9 @@
 	<meta http-equiv="Last-Modified" content="0">
 	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
 	<meta http-equiv="Pragma" content="no-cache">
-   
 
 	<title>Santander Twist</title>
-	
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/materialize.css">
 	<link rel="stylesheet" type="text/css" href="css/global.css">
@@ -90,15 +89,13 @@
 </body>
 <script>
 function login() {
-    alert('login');
 	$("#cargador").show();
-    
-	$.post( "http://panel.santandertwist.com.mx/user/login",{
+	$.post( "http://panel.santandertwist.com.mx/user/login",{ 
 			username: $('#username').val(), 
 			password: $('#password').val()
 		})
       	.done(function( data ) {
-              alert(data.code);
+      		console.log(data);
       		if (data.code==403) {
       			$("#cargador").hide(); 
       			Materialize.toast(data.message, 4000);
@@ -118,6 +115,18 @@ function login() {
 <script type="text/javascript">
 	$(document).ready(function(){
 		console.log(localStorage["userdata"]);
+		console.log("location_url : " + location.href);
+		var query = decodeURI(window.location.search.substring(1));
+		console.log(query); 
+		var vars = query.split("&");
+		console.log(vars);
+		var lat_ = vars[0].split("=");
+		var long_ = vars[1].split("=");
+		console.log(lat_[1]);
+		console.log(long_[1]);
+		localStorage.setItem('lat',lat_[1]);
+		localStorage.setItem('long',long_[1]);
+
     });
 
 </script>
@@ -133,9 +142,8 @@ function login() {
 
     function LoginFace() {
     	
-        //Android.loginFaceBook('');
-        window.location = "otrauri://loginfacebook?show_activity_indicator=true";
-
+       // Android.loginFaceBook('',0);
+       window.location = "otrauri://loginfacebook?show_activity_indicator=true";
     }
 	
 	function consoleLog(view) {

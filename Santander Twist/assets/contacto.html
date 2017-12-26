@@ -48,7 +48,12 @@
 				</ul>
 				<ul class="right">
 					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
-					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+					<li>
+						<img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" />
+						<div class="circulo_noti" >
+							<p id="circulo_noti">0</p>
+						</div>
+					</li>
 				</ul>
 				
 			</div>
@@ -113,23 +118,33 @@
 			<h6>Otros sitios</h6>
 			<ul class="subMenu">
 				<li>
-					<a href="#">Santander</a>
+					<a onclick="otros_sitios('http://www.santander.com.mx')">Santander</a>
 				</li>
 				<li>
-					<a href="#">Recompensas</a>
+					<a  onclick="otros_sitios('https://www.loyaltygateway.com/recompensassantanderrewards/rewards/SignInServlet?bank_id=36621&i18n=es_US')">Recompensas</a>
 				</li>
 				<li>
-					<a href="#">AeroMéxico</a>
+					<a  onclick="otros_sitios('https://www.aeromexico.com/es-mx/promociones/experiencias-santander-aeromexico')">AeroMéxico</a>
 				</li>
 				<li>
-					<a href="#">ViajaCompara</a>
+					<a  onclick="otros_sitios('http://www.viajacompara.com')">ViajaCompara</a>
 				</li>
 				<li>
-					<a href="#">Tiend@</a>
+					<a  onclick="otros_sitios('http://www.tienda.santandertwist.com.mx')">Tiend@</a>
 				</li>
 				<li>
-					<a href="#">
+					<a  onclick="otros_sitios('https://www.fiestarewards.com/es')">
 						Fiesta Rewards
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://santandertwist.com.mx/pagaconpuntos')">
+						Paga con puntos
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://www.tucarrera.mx/')">
+						Tu carrera
 					</a>
 				</li>
 			</ul>
@@ -148,27 +163,8 @@
 	<div id="notificaciones2" class="st">
 		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
 		<div class="cont_noti">
-			<ul>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
+			<ul id="ul_noti">
+				
 			</ul>
 		</div>
 	</div>
@@ -304,6 +300,12 @@
 	      		console.log(data); 
 	      		Materialize.toast(data.message, 4000);     		
 	    	});
-		}		
+		}	
+
+		function otros_sitios(url_go) {
+			console.log(url_go);
+			//Android.go_otros_sitios(url_go);
+            window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
+		}	
 	</script>
 </html>

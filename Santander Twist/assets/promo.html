@@ -76,7 +76,12 @@
 				</ul>
 				<ul class="right">
 					<li><img src="img/header/ico_search.png" height="20px" class="iconos_news search_ico" /></li>
-					<li><img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" /></li>
+					<li>
+						<img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" />
+						<div class="circulo_noti" >
+							<p id="circulo_noti">0</p>
+						</div>
+					</li>
 				</ul>
 				
 			</div>
@@ -141,23 +146,33 @@
 			<h6>Otros sitios</h6>
 			<ul class="subMenu">
 				<li>
-					<a href="#">Santander</a>
+					<a onclick="otros_sitios('http://www.santander.com.mx')">Santander</a>
 				</li>
 				<li>
-					<a href="#">Recompensas</a>
+					<a  onclick="otros_sitios('https://www.loyaltygateway.com/recompensassantanderrewards/rewards/SignInServlet?bank_id=36621&i18n=es_US')">Recompensas</a>
 				</li>
 				<li>
-					<a href="#">AeroMéxico</a>
+					<a  onclick="otros_sitios('https://www.aeromexico.com/es-mx/promociones/experiencias-santander-aeromexico')">AeroMéxico</a>
 				</li>
 				<li>
-					<a href="#">ViajaCompara</a>
+					<a  onclick="otros_sitios('http://www.viajacompara.com')">ViajaCompara</a>
 				</li>
 				<li>
-					<a href="#">Tiend@</a>
+					<a  onclick="otros_sitios('http://www.tienda.santandertwist.com.mx')">Tiend@</a>
 				</li>
 				<li>
-					<a href="#">
+					<a  onclick="otros_sitios('https://www.fiestarewards.com/es')">
 						Fiesta Rewards
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://santandertwist.com.mx/pagaconpuntos')">
+						Paga con puntos
+					</a>
+				</li>
+				<li>
+					<a  onclick="otros_sitios('https://www.tucarrera.mx/')">
+						Tu carrera
 					</a>
 				</li>
 			</ul>
@@ -176,27 +191,8 @@
 	<div id="notificaciones2" class="st">
 		<h6 class="encabezadoPopup">NOTIFICACIONES</h6>
 		<div class="cont_noti">
-			<ul>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
-				<li>
-					<h5>Greñitas <span></span></h5>
-					<p>Participa de Células Madres Cryo- Cell</p>
-				</li>
+			<ul id="ul_noti">
+				
 			</ul>
 		</div>
 	</div>
@@ -266,41 +262,6 @@
 						</div>
 					</div>
 					</div>
-				</div>
-
-				<div class="fonts_p" id="section_2" style="display: none;">
-					<div class="row-90-center">
-						<h1 class="p_font_size_25" id="h1_title_promo_2"></h1>
-						<p id="p_detail_promo_">
-							
-						</p>	
-						<p id="p_start_promo_">
-							
-						</p>
-						<p id="p_end_promo_">
-							
-						</p>	
-
-
-					<div class="row-90-center mar20">
-						<select class="browser-default col s12" id="minimal2" onchange="load_stado(this.value)">
-							<option>Estados</option>
-						</select>
-					</div>
-					
-					<div class="row-90-center mar20">
-						<select class="browser-default col s12" id="suculsales">
-							<option>Sucursales</option>
-						</select>
-					</div>
-
-					<div class="row-100">
-						<div class="row-90-center" id="map"></div>
-					</div>
-					</div>
-
-				</div>
-
 				<div class="share">
 					<div class="row-90-center">
 						<p class="gray">Comparte esta promoción con tus mejores amigos, demuestra los beneficios de ser un cliente Santander Twist.</p>
@@ -317,6 +278,59 @@
 						</p>
 					</div>
 				</div>
+				</div>
+				
+				<div class="fonts_p" style="display:none" id="section_2_2">
+				  <div class="s_5"></div>
+				  <div class="row-90-center">
+					<h5 class="p_font_size_25">Información del comercio</h5>
+					<div class="row-100">
+					  <img id="img_shop" height="90">
+					</div>
+					<div class="row-100">
+					  <a id="link_shop" target="_blank" class="no-hover" tabindex="0"></a>
+					</div>
+					<div class="s_10"></div>
+					<div class="row-100">
+					  <p id="descrip_shop" class="black ng-binding"></p>
+					</div>
+				  </div>
+				</div>
+
+				<div class="fonts_p" id="section_2" style="display: none;">
+					<div class="row-90-center" id="combos_">
+						<h1 class="p_font_size_25" id="h1_title_promo_2"></h1>
+						<p id="p_detail_promo_">
+							
+						</p>	
+						<p id="p_start_promo_">
+							
+						</p>
+						<p id="p_end_promo_">
+							
+						</p>	
+
+
+						<div class="row-90-center mar20">
+							<select class="browser-default col s12" id="minimal2" onchange="load_stado(this.value)">
+								<option>Estados</option>
+							</select>
+						</div>
+						
+						<div class="row-90-center mar20">
+							<select class="browser-default col s12" id="suculsales">
+								<option>Sucursales</option>
+							</select>
+						</div>
+
+						<div class="row-100">
+							<div class="row-90-center" id="map"></div>
+						</div>
+					</div>
+
+				</div>
+				
+				
 			</div>
 		</section>
 		<div class="s_20"></div>
@@ -439,9 +453,11 @@
 		// Initialize the slider
 		<script>
 		  	$(document).ready(function(){
+		  		load_promo();
+		  		
 		  		userdata = JSON.parse(localStorage["userdata"]);
 				$('#not').append(" " + userdata.username);
-				load_promo();
+				
 				load_estadoss();
 
 				getToken();
@@ -468,6 +484,8 @@
 			}		
 
 		  	function getAcceso() {
+		  		//console.log("Promo interrior \n");
+		  		//console.log(localStorage.getItem('promo_interior'));
 		  		$.post( "https://2.santandertwist.com.mx/ajax/accesoPromo.php",{
 		  			token:localStorage.getItem("active_token"),
 		  			slug:localStorage.getItem('promo_interior')
@@ -486,36 +504,66 @@
 		    		}
 			    });		  		
 
-			}					  	
+			}
+			
+			var numberOfImages;
 
 		  	function load_promo() {
 		  		$("#cargador").show();
+		  		//console.log(localStorage.getItem('promo_interior'));
 		  		$.post( "http://panel.santandertwist.com.mx/api/get_promo_by_slug",{
 		  			slug:localStorage.getItem('promo_interior')
 				})
 		    	.done(function( data ) {
-		    		console.log(data);
-		    		var html='';
-		    		$("#h1_title_promo").html(data.promo.title);
-		    		$("#img_img_promo").attr('src','https://uploads.santandertwist.com.mx' + data.promo.interior_image);	
-		    		$("#h1_title_promo_2").html(data.promo.title);	
-		    		$("#p_detail_promo").html(data.promo.detail);
-		    		$("#p_start_promo").html('<br>Vigencia:<br> Del ' +data.promo.day_start + ' de ' + return_month(data.promo.month_start) + ' del ' + data.promo.year_start );  
-		    		$("#p_end_promo").html('al ' +data.promo.day_end + ' de ' + return_month(data.promo.month_end) + ' del ' + data.promo.year_end );
-		    		$("#p_term_promo").html(data.promo.terms);  
-		    		$.each(data.promos_related,function (key,value) {
-		    			html += '<div><div class="row-100"><img src="https://uploads.santandertwist.com.mx' + value.small_image + '"></div><div class="row-100 text_center conf_share"><img src="img/facebook_gris.svg"  onclick="fb(\''+data.promo.title+'\',\''+data.promo.slug+'\');" class="icon_s_"/><img src="img/twitter_gris.svg" onclick="tw(\''+data.promo.slug+'\',\''+data.promo.title+'\');" class="icon_s_ pad"/><img src="img/whatsapp_gris.svg" onclick="wp(\''+data.promo.slug+'\');" class="icon_s_"/></div><div class="row-90-center mar20"><button class="btn btn_red_white" onclick="promo_interior(\''+data.promo.slug+'\')">Ver Promoción</button></div></div>';
-		    		})
-		    		$('.slider').html(html);  
-			    	$('.slider').bxSlider({
-				  		auto: true,
-				  		stopAutoOnClick: true,
-				  		pager: true,
-				  		minSlides: 1,
-				  		maxSlides: 1
-					}); 
-					$("#cargador").hide(); 		
-			    });
+		    		if (data.code == 200) {
+			    		console.log(data);
+			    		var html='';
+
+			    		localStorage.setItem('promo_interior_shop',data.promo.shop_id);
+			    		console.log(localStorage.getItem("promo_interior_shop"));
+			    		if (localStorage.getItem("promo_interior_shop") == 796) {
+				  			$("#combos_").css('display','none');
+						}
+
+			    		$("#h1_title_promo").html(data.promo.title);
+			    		$("#img_img_promo").attr('src','https://uploads.santandertwist.com.mx' + data.promo.interior_image);	
+			    		$("#h1_title_promo_2").html(data.promo.title);	
+			    		$("#p_detail_promo").html(data.promo.detail);
+			    		$("#p_start_promo").html('<br>Vigencia:<br> Del ' +data.promo.day_start + ' de ' + return_month(data.promo.month_start) + ' del ' + data.promo.year_start );  
+			    		$("#p_end_promo").html('al ' +data.promo.day_end + ' de ' + return_month(data.promo.month_end) + ' del ' + data.promo.year_end );
+			    		$("#p_term_promo").html(data.promo.terms);  
+			    		$.each(data.promos_related,function (key,value) {
+						  numberOfImages = data.promos_related.length;
+			    			html += '<div><div class="row-100"><img src="https://uploads.santandertwist.com.mx' + value.small_image + '"></div><div class="row-100 text_center conf_share"><img src="img/facebook_gris.svg"  onclick="fb(\''+value.title+'\',\''+value.slug+'\');" class="icon_s_"/><img src="img/twitter_gris.svg" onclick="tw(\''+value.slug+'\',\''+value.title+'\');" class="icon_s_ pad"/><img src="img/whatsapp_gris.svg" onclick="wp(\''+value.slug+'\');" class="icon_s_"/></div><div class="row-90-center mar20"><button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\',' + value.shop_id + ')">Ver Promoción</button></div></div>';
+			    		})
+			    		$('.slider').html(html);  
+		  				var coverSlider = $('.slider').bxSlider({
+					  		auto: true,
+					  		stopAutoOnClick: true,
+					  		pager: true,
+							infiniteLoop:false,
+							hideControlOnEnd: true,
+					  		minSlides: 1,
+					  		maxSlides: 1
+						});
+						
+						if (numberOfImages > 1) {
+							coverSlider.reloadSlider();
+						} else {
+							coverSlider.destroySlider();
+						}
+						$("#img_shop").attr('src','https://uploads.santandertwist.com.mx' + data.shop[0].image);
+						$("#link_shop").attr('href',data.shop[0].url);
+						$("#link_shop").html(data.shop[0].url);
+						$("#descrip_shop").html(data.shop[0].description);
+						$("#cargador").hide(); 		
+					} else if (data.code == 403){
+						Materialize.toast(data.message, 6000,'',function() {
+							location.href = 'index.html'
+						});
+					}
+			    }); 
+		  		
 			}
 
 			function return_month(month) {
@@ -536,7 +584,9 @@
 					$(".tab_2").addClass("p_tab_inactive").removeClass("p_tab_active");
 					$("#section_1").hide();
 					$("#section_2").hide();
+					$("#section_2_2").hide();
 					$("#section_" + id).show();
+					$("#section_2_" + id).show();
 					$(".tab_" + id).addClass("p_tab_active").removeClass("p_tab_inactive");
 				}
 
@@ -590,14 +640,15 @@
   }
   </script>
   <script type="text/javascript">
-	  function promo_interior(slug) {
+	  function promo_interior(slug,shop) {
 		localStorage.setItem("promo_interior", slug);
+		localStorage.setItem("promo_interior_shop", shop);
 		window.location = "promo.html";
 	  }
 	
 	  function wp(pl) {
-		  //Android.whatsapp(pl);
-          window.location = "otrauri://sharewp?show_activity_indicator=true&pl=" + pl;
+		 // Android.whatsapp(pl);
+         window.location = "otrauri://sharewp?show_activity_indicator=true&pl=" + pl;
 	  }
 	  
 	  function tw(pl,ti) {
@@ -618,6 +669,12 @@
 	
 	function oprimir_back(){
 		window.history.back();
+	}
+
+	function otros_sitios(url_go) {
+		console.log(url_go);
+		//Android.go_otros_sitios(url_go);
+        window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
 </script>
 	</div>

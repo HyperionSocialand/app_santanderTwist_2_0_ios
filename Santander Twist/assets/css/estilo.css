@@ -305,7 +305,7 @@ button[type="submit"].btn_red,button[type="button"].btn_red {
     width: 100%;
     display: block;
     background: #d2d2d2;
-    padding: 10px 0px;
+    padding: 10px 10px 10px 10px;
     text-align: center;
     border-radius: 5px;
 }

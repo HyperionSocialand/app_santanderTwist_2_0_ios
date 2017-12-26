@@ -30,6 +30,10 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
         view.addSubview(loginButton as! UIView)
         // Do any additional setup after loading the view.
     }
+    
+    func logout(){
+        FBSDKLoginManager().logOut()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,7 +80,6 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
         var dato_ = String(describing: dato)
         dato_ = dato_.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let u = "http://panel.santandertwist.com.mx/user/post_login_fb?ios=true&buc=\(self.BUC)&data=\(dato_)"
-        print(u)
         let url = URL(string: u)
         let session = URLSession.shared // or let session = URLSession(configuration: URLSessionConfiguration.default)
         let request = NSMutableURLRequest(url: url!)
@@ -89,14 +92,13 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
                 if let stringData = String(data: data, encoding: String.Encoding.utf8) {
                     self.informacion=stringData
                 }
-                print("Regreso: \(self.informacion)")
                 
                 do{
                     if let jsonResult = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers){
                         
-                        print("JSON: \(jsonResult)")
+                        //print("JSON: \(jsonResult)")
                         let Array:NSDictionary = jsonResult as! NSDictionary
-                        print("Array: \(Array)")
+                        //print("Array: \(Array)")
                         
                         DispatchQueue.main.async(execute: {
                             
@@ -119,7 +121,7 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
                                 vc.idface = dato["id"] as! String
                                 vc.emailface = dato["email"] as! String
                             }
-                            
+                            self.logout()
                             self.present(vc, animated: false, completion: nil)
                            
                         })

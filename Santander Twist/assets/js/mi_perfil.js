@@ -2,13 +2,45 @@
 	
 	$(document).ready(function(){
 		userdata = JSON.parse(localStorage["userdata"]);
-		load_profile(userdata.buc_final);
+		if (userdata.fbdata==0) {
+					console.log(userdata.fbdata);
+					$('#pass_new').css('display','block');
+					$('#pas_conf').css('display','block');
+					$('#bt_fb').html('Vincula con Facebook');
+					$('#bt_fb').attr('onclick','vincular()');
+				}else{
+					$('#pass_new').css('display','none');
+					$('#pas_conf').css('display','none');
+					$('#bt_fb').html('Desvincular con Facebook');
+					$('#bt_fb').attr('onclick','desvincular()');
+				}
+		var query = decodeURI(window.location.search.substring(1));
+		console.log("URL_: " + query);
+		var vars = query.split("&");
+
+		console.log("longitud:" + vars.length);
+
+		if (vars.length == 2) {
+			var code = vars[1].split("=");
+			if (code[1]==101) {
+				Materialize.toast('Tu cuaenta de Facebook a sido vinculada con tu cuenta de Santandertwist', 2000);
+			}
+			if (code[1]==103) {
+				Materialize.toast('Tu cuaenta de Facebook ya a sido vinculada con otra cuenta de Santandertwist', 2000);
+			}
+		}
+
+		userdata = JSON.parse(localStorage["userdata"]);
+		load_profile(userdata.buc_final);	  	
+		$('#not').append(" " + userdata.username);
 	});
 
-	function load_profile(buc) {		
+	function load_profile(buc) {	
+		$("#cargador").show();	
 		$.get( "http://panel.santandertwist.com.mx/api/get_user_profile/" + buc,{
 		})
 		.done(function(data) {	
+			$("#cargador").hide();
 			if (data.code==403) {
 				$('#btn_act').attr('onclick','send_form_insert()');
 				$('#pass_new').css('display','none');
@@ -16,6 +48,10 @@
 				Materialize.toast(data.message, 2000);
 			}
 			if (data.code==200) {
+			    window.localStorage.clear();
+                localStorage["userdata"] = JSON.stringify(data.userdata);
+                userdata = JSON.parse(localStorage["userdata"]);
+                console.log(localStorage["userdata"]);
 				$('#btn_act').attr('onclick','send_form_actu()');
 				if (userdata.fbdata==0) {
 					console.log(userdata.fbdata);
@@ -28,13 +64,13 @@
 					$('#pas_conf').css('display','none');
 					$('#bt_fb').html('Desvincular con Facebook');
 					$('#bt_fb').attr('onclick','desvincular()');
-				}				
+				}
 				$("#username").val(data.profile[0].usuario);
 				$("#nombre").val(data.profile[0].nombre);
 				$("#a_paterno").val(data.profile[0].a_paterno);
 				$("#a_materno").val(data.profile[0].a_materno);
 				$("#email").val(data.profile[0].email);
-				Materialize.toast(data.message, 2000);	
+
 			}     		
 		});
 	}
@@ -52,6 +88,7 @@
 		.done(function( data ) {
 			Materialize.toast(data.message, 6000);
 			if (data.code==200) {
+				Materialize.toast(data.message, 6000);
 				location.reload();
 			}
 		});
@@ -59,6 +96,7 @@
 
 	function send_form_actu() {
 		if (validate_form())
+		$("#cargador").show();	
 		$.post( "http://panel.santandertwist.com.mx/api/update_profile",{
 			username:userdata.username,
 			nombre:$('#nombre').val(),
@@ -70,10 +108,11 @@
 			pass_con:$('#pass_con').val()
 		})
 		.done(function( data ) {
-			console.log(data);
+			$("#cargador").hide();	
 			Materialize.toast(data.message, 6000);
 			if (data.code==200) {
 				location.reload();
+				Materialize.toast(data.message, 6000);
 			}
 			if (data.code==201) {
 				window.localStorage.clear();
@@ -135,7 +174,7 @@
 					    	html += '<div class="cnt">';
 								html += '<a href="#">';
 									html += '<div class="imagen-over">';
-										html += '<div class="priImgBg abs" style="background-image: url(https://santandertwist.com.mx' + value.small_image + ');"></div>';
+										html += '<div class="priImgBg abs" style="background-image: url(https://uploads.santandertwist.com.mx' + value.small_image + ');"></div>';
 									html += '</div>';
 									html += '<div class="tit_over">';
 										html += '<div>';
@@ -180,7 +219,7 @@
 			    $.each(data.redimidas, function( index, value ) {
 			    	html += '<div class="col s12 valign-wrapper">';
 						html += '<div class="col s8 valign-wrapper">';
-							html += '<img src="https://santandertwist.com.mx' + value.small_image + '"/>';
+							html += '<img src="https://uploads.santandertwist.com.mx' + value.small_image + '"/>';
 							html += '<p class="justify-align black-text">' + value.title + '</p>';
 						html += '</div>';
 						html += '<div class="col s4 right-align">';
@@ -213,7 +252,7 @@
 				html += '<div class="row">';
 					html += '<div class="col s12">';
 						html += '<div class="col s8 valign-wrapper">';
-							html += '<img src="https://santandertwist.com.mx' + value.small_image + '"/>';
+							html += '<img src="https://uploads.santandertwist.com.mx' + value.small_image + '"/>';
 							html += '<p class="justify-align black-text">' + value.title + '</p>';
 						html += '</div>';
 						html += '<div class="col s4 right-align">';
@@ -236,7 +275,7 @@
 				html += '<div class="row">';
 					html += '<div class="col s12">';
 						html += '<div class="col s8 valign-wrapper">';
-							html += '<img src="https://santandertwist.com.mx' + value.small_image + '"/>';
+							html += '<img src="https://uploads.santandertwist.com.mx' + value.small_image + '"/>';
 							html += '<p class="justify-align black-text">' + value.title + '</p>';
 						html += '</div>';
 						html += '<div class="col s4 right-align">';

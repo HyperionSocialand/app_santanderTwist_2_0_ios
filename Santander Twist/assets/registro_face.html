@@ -73,7 +73,7 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
-									<button class="btn btn_red" onclick="oprimir_back();" style="background: #3b5998;" type="button">Cerrar sesión de Facebook</button>
+									<button class="btn btn_red" onclick="cerrarFace();" style="background: #3b5998;" type="button">Cerrar sesión de Facebook</button>
 								</div>
 							</div>
 						</form>
@@ -93,7 +93,6 @@
 </body>
 <script>
 	$(document).ready(function () {
-        //alert("HOLA JOTOS");
 		getQueryVariable();
 		localStorage.setItem('type_reg',0);		
 		//Android.console_view('Datos: ' + window.location.href);
@@ -102,15 +101,13 @@
 	function getQueryVariable() {
 	   var query = decodeURI(window.location.search.substring(1));
 	   var vars = query.split("&");
-	   var id_fb = vars[1].split("=");
-	   var username = vars[2].split("=");
-	   var email_fb = vars[3].split("=");
-       
+	   var id_fb = vars[0].split("=");
+	   var username = vars[1].split("=");
+	   var email_fb = vars[2].split("=");
 	   //var fb_data = [id_fb[1],username[1]];
-	   localStorage.setItem('fb_username',username[1]));
+	   localStorage.setItem('fb_username',username[1]);
 	   localStorage.setItem('fb_id',id_fb[1]);
 	   localStorage.setItem('email_fb',email_fb[1]);
-       
 	}
 
 	
@@ -188,10 +185,10 @@
     	});
 	}
 
-	function oprimir_back(){
-		localStorage.clear();
-    	window.history.back();
-   }
+function cerrarFace(){
+	//Android.cerrarSesion();
+    window.location = "otrauri://cerrarFace?show_activity_indicator=true";
+}
 
    function redirect_login() {
    		window.localStorage.clear();

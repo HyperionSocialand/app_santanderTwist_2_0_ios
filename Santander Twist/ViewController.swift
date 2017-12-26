@@ -184,7 +184,29 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
             self.present(vc, animated: false, completion: nil)
         }
         
+        if(_req.contains("tarjetasbanco")){
+            loadPage(url: "https://servicios.santander.com.mx/tarjetas/tarjetas/index.html")
+        }
+        
+        if(_req.contains("otros_sitios")){
+            var pl:String?
+            for variable in variables{
+                let array = variable.components(separatedBy: "=")
+                pl = String(array[1])
+            }
+            
+            loadPage(url: pl!)
+        }
+        
+        if(_req.contains("cerrarFace")){
+            
+        }
+        
         return true;
+    }
+    
+    func loadPage(url: String){
+        UIApplication.shared.open(URL(string: url)!)
     }
     
     func rechargePage(){
