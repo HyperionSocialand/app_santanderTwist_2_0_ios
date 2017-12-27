@@ -70,7 +70,7 @@
 					<li>
 						<img src="img/header/logo-santander.png" height="17px">
 					</li>
-					<li>
+					<li onclick="location.href='index.html'">
 						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
 					</li>
 				</ul>
@@ -79,7 +79,7 @@
 					<li>
 						<img src="img/header/noti.png" onclick="activar('notificaciones2')" height="20px" class="iconos_news" />
 						<div class="circulo_noti" >
-							<p id="circulo_noti">0</p>
+							<p id="circulo_noti"></p>
 						</div>
 					</li>
 				</ul>
@@ -180,9 +180,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <li>
+	    <!--li>
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li>
+	    </li-->
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -248,19 +248,20 @@
 						<p id="p_end_promo">
 							
 						</p>
-					<div class="fonts_p">
-						<div class="row-90-center text_center bttn_top_30 bttn_bottom_30" style="display: none;"  id="entrar1">
-							<a onclick="window.location = 'campanias.html'" class="btn_entrar">Entrar</a>
+						<div class="s_20"></div>
+						<div class="fonts_p">
+							<div class="btn_center center" id="entrar1" style="display: none;">
+								<button onclick="window.location = 'campanias.html'" type="button" style="outline: none; cursor: pointer;" class="btn_entrar entrar">Entrar</button>
+							</div>
+							<div class="row-90-center text_center bttn_top_30 bttn_bottom_30" style="display: none;"  id="entrar2">
+								<a onclick="mostrarError();" class="btn_entrar entrar">Entrar</a>
+							</div>		
+							<div id="msgError" class="bttn_top_30 bttn_bottom_30" style="display: none;">
+							<div class="msjErroCampaing cntR link-tarjetas">
+							  <p class="black"></p><div class="ng-binding">Para poder participar en esta campaña debes estar registrado y/o logeado en Santander Twist. Si aún no te registraste, <a>hazlo ahora</a> y disfruta de toda la experiencia que hemos preparado para ti.</div><p></p>
+							</div>
+							</div>
 						</div>
-						<div class="row-90-center text_center bttn_top_30 bttn_bottom_30" style="display: none;"  id="entrar2">
-							<a onclick="mostrarError();" class="btn_entrar">Entrar</a>
-						</div>		
-						<div id="msgError" class="bttn_top_30 bttn_bottom_30" style="display: none;">
-						<div class="msjErroCampaing cntR link-tarjetas">
-						  <p class="black"></p><div class="ng-binding">Para poder participar en esta campaña debes estar registrado y/o logeado en Santander Twist. Si aún no te registraste, <a>hazlo ahora</a> y disfruta de toda la experiencia que hemos preparado para ti.</div><p></p>
-						</div>
-						</div>
-					</div>
 					</div>
 				<div class="share">
 					<div class="row-90-center">
@@ -271,6 +272,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="fonts_p">
 					<div class="row-90-center">
 						<p id="p_term_promo" class="center">
@@ -477,7 +479,7 @@
 		  			buc:userdata.buc_final
 				})
 		    	.done(function( data ) {
-		    		console.log(data);
+		    		console.log("Token" + data);
 		    		localStorage.setItem("active_token", data);
 		    		getAcceso();
 			    });
@@ -491,6 +493,7 @@
 		  			slug:localStorage.getItem('promo_interior')
 				})
 		    	.done(function( data ) {
+		    		console.log("Log" + data);
 		    		switch(data){
 		    			case "1": //promo normal (sin botón de entrar)
 
@@ -516,11 +519,10 @@
 				})
 		    	.done(function( data ) {
 		    		if (data.code == 200) {
-			    		console.log(data);
 			    		var html='';
 
 			    		localStorage.setItem('promo_interior_shop',data.promo.shop_id);
-			    		console.log(localStorage.getItem("promo_interior_shop"));
+			    		//console.log(localStorage.getItem("promo_interior_shop"));
 			    		if (localStorage.getItem("promo_interior_shop") == 796) {
 				  			$("#combos_").css('display','none');
 						}
@@ -556,7 +558,11 @@
 						$("#link_shop").attr('href',data.shop[0].url);
 						$("#link_shop").html(data.shop[0].url);
 						$("#descrip_shop").html(data.shop[0].description);
-						$("#cargador").hide(); 		
+						$("#cargador").hide(); 
+						if (data.promo.promo_type == 5) {
+							$("#entrar").css('display','block');
+							$("#btn_entrar").attr('onclick','entrar(\'' + data.promo.slug+ '\',' + data.promo.promo_id+ ')')
+						}		
 					} else if (data.code == 403){
 						Materialize.toast(data.message, 6000,'',function() {
 							location.href = 'index.html'
@@ -607,17 +613,28 @@
 			//slug:localStorage.getItem('shop_list')
 		})
 		.done(function( data ) {
-		console.log(data);
+		//console.log(data);
 	});
   </script>
 
   <script type="text/javascript">
+
+  function entrar(slug,promo_id) {
+  	$.get( "http://panel.santandertwist.com.mx/api/accesoPromo",{
+  		buc_final: userdata.buc_final,
+		id_promo: promo_id
+	})
+    .done(function( data ) {
+    	//console.log(data);
+    });	
+  }
+
   function load_estadoss() {
   	$.get( "http://panel.santandertwist.com.mx/api/get_states",{
   		
 	})
     .done(function( data ) {
-    	console.log(data);
+    	//console.log(data);
     	html = '';
     	$.each(data.states, function (index, value) {
     		html += '<option value="' + value.code + '">' + value.state_name + '</option>';
@@ -647,18 +664,15 @@
 	  }
 	
 	  function wp(pl) {
-		 // Android.whatsapp(pl);
-         window.location = "otrauri://sharewp?show_activity_indicator=true&pl=" + pl;
+		  Android.whatsapp(pl);
 	  }
 	  
 	  function tw(pl,ti) {
-		  //Android.twitter(pl,ti);
-          window.location = "otrauri://sharetwi?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
+		  Android.twitter(pl,ti);
 	  }
 	  
 	  function fb(ti,pl) {
-		  //Android.facebook(ti,pl);
-          window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
+		  Android.facebook(ti,pl);
 	  }
   </script>
 <script type="text/javascript">
@@ -672,7 +686,7 @@
 	}
 
 	function otros_sitios(url_go) {
-		console.log(url_go);
+		//console.log(url_go);
 		//Android.go_otros_sitios(url_go);
         window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
