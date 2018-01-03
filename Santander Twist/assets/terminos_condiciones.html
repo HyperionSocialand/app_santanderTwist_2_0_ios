@@ -152,9 +152,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <!--li>
+	    <li onclick="location.href = 'favoritos.html'"> 
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li-->
+	    </li>
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -303,8 +303,13 @@
 	</div>
 </body>
 <script type="text/javascript">
+	$(document).ready(function () {
+		localStorage.removeItem('corazon');
+	})
 	function tarjeta() {
-		Android.tarjetasbanco();
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+
 	}
 	
 	function oprimir_back(){
@@ -313,7 +318,8 @@
 
 	function otros_sitios(url_go) {
 		console.log(url_go);
-		Android.go_otros_sitios(url_go);
+		//Android.go_otros_sitios(url_go);
+        window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
 </script>	
 </html>

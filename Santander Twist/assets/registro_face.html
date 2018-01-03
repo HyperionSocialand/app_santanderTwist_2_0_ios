@@ -113,7 +113,8 @@
 	
 	function type_reg(val) {
 		localStorage.setItem('type_reg',val)
-		Android.console_view('type_reg: ' + localStorage.getItem('type_reg'));
+		//Android.console_view('type_reg: ' + localStorage.getItem('type_reg'));
+        window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + localStorage.getItem('type_reg');
 	}
 	function post_registro_fb() {
 
@@ -185,7 +186,8 @@
 	}
 
 function cerrarFace(){
-	Android.cerrarSesion();
+	//Android.cerrarSesion();
+    window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
 }
 
    function redirect_login() {

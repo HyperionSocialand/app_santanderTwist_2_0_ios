@@ -71,7 +71,7 @@
 						<img src="img/header/logo-santander.png" height="17px">
 					</li>
 					<li onclick="location.href='index.html'">
-						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+						<a onclick="location.href='index.html"><img src="img/header/logo-twist.svg" height="17px"></a>
 					</li>
 				</ul>
 				<ul class="right">
@@ -180,9 +180,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <!--li>
+	    <li onclick="location.href = 'favoritos.html'"> 
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li-->
+	    </li>
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -205,7 +205,7 @@
 				<div class="row-80 m_aling text_left">
 					<h1 class="p_text_h1" id="h1_title_promo"></h1>
 				</div>
-				<div class="row-20 m_aling_ text_center p_cerrar" onclick="window.location = 'index.html'">
+				<div class="row-20 m_aling_ text_center p_cerrar" onclick="localStorage.removeItem('corazon');window.location = 'index.html';">
 					<img src="img/cerrar.png" class="row-30 pding_14">
 				</div>
 			</div>
@@ -226,7 +226,7 @@
 						<div class="pos_relative row-30 m_aling text_center tab_2 p_tab_inactive" onclick="changeTap(2),mapaCompleto()">
 							<img src="img/ic_store_mall_directory.svg" class="p_img_tab">
 						</div>
-						<div class="pos_relative row-30 m_aling text_center p_tab_hart_inactive" onclick="changeTap(3)">
+						<div class="pos_relative row-30 m_aling text_center p_tab_hart_inactive" >
 							<img id="har" src="img/ic_corazon_white.svg" class="p_img_tab">
 						</div>
 					</div>
@@ -258,7 +258,7 @@
 							</div>		
 							<div id="msgError" class="bttn_top_30 bttn_bottom_30" style="display: none;">
 							<div class="msjErroCampaing cntR link-tarjetas">
-							  <p class="black"></p><div class="ng-binding">Para poder participar en esta campaña debes estar registrado y/o logeado en Santander Twist. Si aún no te registraste, <a>hazlo ahora</a> y disfruta de toda la experiencia que hemos preparado para ti.</div><p></p>
+							  <p class="black"></p><div class="ng-binding" id="msgPromo">Para poder participar en esta campaña debes estar registrado y/o logeado en Santander Twist. Si aún no te registraste, <a>hazlo ahora</a> y disfruta de toda la experiencia que hemos preparado para ti.</div><p></p>
 							</div>
 							</div>
 						</div>
@@ -357,7 +357,7 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li class="hide-on-med-and-up"><a onclick="location.href='index.html"><img src="img/header/logo-twist.svg"></a></li>
 							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
 							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
 							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
@@ -455,6 +455,7 @@
 		// Initialize the slider
 		<script>
 		  	$(document).ready(function(){
+		  		localStorage.removeItem('corazon');
 		  		load_promo();
 		  		
 		  		userdata = JSON.parse(localStorage["userdata"]);
@@ -486,14 +487,15 @@
 			}		
 
 		  	function getAcceso() {
-		  		//console.log("Promo interrior \n");
-		  		//console.log(localStorage.getItem('promo_interior'));
-		  		$.post( "https://2.santandertwist.com.mx/ajax/accesoPromo.php",{
+		  		console.log("Promo interrior \n");
+		  		console.log(localStorage.getItem('promo_interior'));
+	  			$.post( "https://2.santandertwist.com.mx/ajax/accesoPromo.php",{
 		  			token:localStorage.getItem("active_token"),
 		  			slug:localStorage.getItem('promo_interior')
 				})
 		    	.done(function( data ) {
 		    		console.log("Log" + data);
+
 		    		switch(data){
 		    			case "1": //promo normal (sin botón de entrar)
 
@@ -502,11 +504,21 @@
 		    				showEntrar1();
 		    			break;
 		    			case "3": //botón de entrar (acceso bloqueado)
-		    				showEntrar2();
+
+
+				  			$.post( "https://2.santandertwist.com.mx/ajax/accesoPromoMsg.php",{
+					  			slug:localStorage.getItem('promo_interior')
+							})
+					    	.done(function( data ) {
+					    		$("#msgPromo").html(data);
+					    		//Materialize.toast('valor: ' + data + " promo: " + localStorage.getItem('promo_interior'), 4000);
+					    		showEntrar2();
+						    });
+
+
 		    			break;		    					    			
 		    		}
-			    });		  		
-
+			    });
 			}
 			
 			var numberOfImages;
@@ -515,7 +527,8 @@
 		  		$("#cargador").show();
 		  		//console.log(localStorage.getItem('promo_interior'));
 		  		$.post( "http://panel.santandertwist.com.mx/api/get_promo_by_slug",{
-		  			slug:localStorage.getItem('promo_interior')
+		  			slug:localStorage.getItem('promo_interior'),
+		  			username: userdata.username
 				})
 		    	.done(function( data ) {
 		    		if (data.code == 200) {
@@ -534,26 +547,34 @@
 			    		$("#p_start_promo").html('<br>Vigencia:<br> Del ' +data.promo.day_start + ' de ' + return_month(data.promo.month_start) + ' del ' + data.promo.year_start );  
 			    		$("#p_end_promo").html('al ' +data.promo.day_end + ' de ' + return_month(data.promo.month_end) + ' del ' + data.promo.year_end );
 			    		$("#p_term_promo").html(data.promo.terms);  
-			    		$.each(data.promos_related,function (key,value) {
-						  numberOfImages = data.promos_related.length;
-			    			html += '<div><div class="row-100"><img src="https://uploads.santandertwist.com.mx' + value.small_image + '"></div><div class="row-100 text_center conf_share"><img src="img/facebook_gris.svg"  onclick="fb(\''+value.title+'\',\''+value.slug+'\');" class="icon_s_"/><img src="img/twitter_gris.svg" onclick="tw(\''+value.slug+'\',\''+value.title+'\');" class="icon_s_ pad"/><img src="img/whatsapp_gris.svg" onclick="wp(\''+value.slug+'\');" class="icon_s_"/></div><div class="row-90-center mar20"><button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\',' + value.shop_id + ')">Ver Promoción</button></div></div>';
-			    		})
-			    		$('.slider').html(html);  
-		  				var coverSlider = $('.slider').bxSlider({
-					  		auto: true,
-					  		stopAutoOnClick: true,
-					  		pager: true,
-							infiniteLoop:false,
-							hideControlOnEnd: true,
-					  		minSlides: 1,
-					  		maxSlides: 1
-						});
-						
-						if (numberOfImages > 1) {
-							coverSlider.reloadSlider();
-						} else {
-							coverSlider.destroySlider();
-						}
+			    		if (data.promos_related.length>0) {
+			    			$.each(data.promos_related,function (key,value) {
+
+							 	numberOfImages = data.promos_related.length;
+				    			html += '<div><div class="row-100"><img src="https://uploads.santandertwist.com.mx' + value.small_image + '"></div><div class="row-100 text_center conf_share"><img src="img/facebook_gris.svg"  onclick="fb(\''+value.title+'\',\''+value.slug+'\');" class="icon_s_"/><img src="img/twitter_gris.svg" onclick="tw(\''+value.slug+'\',\''+value.title+'\');" class="icon_s_ pad"/><img src="img/whatsapp_gris.svg" onclick="wp(\''+value.slug+'\');" class="icon_s_"/></div><div class="row-90-center mar20"><button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\',' + value.shop_id + ')">Ver Promoción</button></div></div>';
+				    		})
+				    		$('.slider').html(html);  
+			  				var coverSlider = $('.slider').bxSlider({
+						  		auto: true,
+						  		stopAutoOnClick: true,
+						  		pager: true,
+								infiniteLoop:false,
+								hideControlOnEnd: true,
+						  		minSlides: 1,
+						  		maxSlides: 1
+							});
+							
+							if (numberOfImages > 1) {
+								coverSlider.reloadSlider();
+							} else {
+								coverSlider.destroySlider();
+							}
+			    		}else{
+			    			$('.slider').css('display','none'); 
+			    			$('.uli_conf_promo').append('<div class="center">Sin promociones relacionadas</div>');
+			    		}
+			    		
+			    		
 						$("#img_shop").attr('src','https://uploads.santandertwist.com.mx' + data.shop[0].image);
 						$("#link_shop").attr('href',data.shop[0].url);
 						$("#link_shop").html(data.shop[0].url);
@@ -562,6 +583,18 @@
 						if (data.promo.promo_type == 5) {
 							$("#entrar").css('display','block');
 							$("#btn_entrar").attr('onclick','entrar(\'' + data.promo.slug+ '\',' + data.promo.promo_id+ ')')
+						}
+
+						if (data.promo.favorita == 'si') {
+							$("#har").attr("src","img/ic_corazon_red.svg");
+							$("#har").attr("onclick","fav_select(1," + data.promo.promo_id + ");changeTap(3);");7
+							localStorage.setItem('corazon',1);
+						}else{
+							$("#har").attr("src","img/ic_corazon_white.svg");
+							$("#har").attr("onclick","fav_select(0," + data.promo.promo_id + ");changeTap(3);");
+							localStorage.setItem('corazon',0);
+							
+							
 						}		
 					} else if (data.code == 403){
 						Materialize.toast(data.message, 6000,'',function() {
@@ -581,7 +614,6 @@
 
 		</script>
 		<script type="text/javascript">
-			var corazon = false;
 
 			function changeTap(id){
 			  
@@ -596,14 +628,14 @@
 					$(".tab_" + id).addClass("p_tab_active").removeClass("p_tab_inactive");
 				}
 
-				if(id == 3 && corazon == false){
+				if(id == 3 && localStorage.getItem('corazon') == 0){
 					$("#har").attr("src","img/ic_corazon_red.svg");
-					return corazon = true;
+					return localStorage.setItem('corazon',1);
 				}
 
-				if(id == 3 && corazon == true){
+				if(id == 3 && localStorage.getItem('corazon') == 1){
 					$("#har").attr("src","img/ic_corazon_white.svg");
-					return corazon = false;
+					return localStorage.setItem('corazon',0);
 				}
 
 			};
@@ -664,20 +696,24 @@
 	  }
 	
 	  function wp(pl) {
-		  Android.whatsapp(pl);
+		 // Android.whatsapp(pl);
+         window.location = "otrauri://sharewp?show_activity_indicator=true&pl=" + pl;
 	  }
 	  
 	  function tw(pl,ti) {
-		  Android.twitter(pl,ti);
+		  //Android.twitter(pl,ti);
+          window.location = "otrauri://sharetwi?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
 	  }
 	  
 	  function fb(ti,pl) {
-		  Android.facebook(ti,pl);
+		  //Android.facebook(ti,pl);
+          window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
 	  }
   </script>
 <script type="text/javascript">
 	function tarjeta() {
-		Android.tarjetasbanco();
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
 	}
 	
 	function oprimir_back(){
@@ -686,7 +722,8 @@
 
 	function otros_sitios(url_go) {
 		//console.log(url_go);
-		Android.go_otros_sitios(url_go);
+		//Android.go_otros_sitios(url_go);
+        window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
 </script>
 	</div>

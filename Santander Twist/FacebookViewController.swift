@@ -18,9 +18,11 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
     var info = ""
     var informacion = ""
     var BUC = ""
+    var cerrar:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         let loginButton = FBSDKLoginButton()
         loginButton.delegate = self
@@ -29,10 +31,18 @@ class FacebookViewController: UIViewController,FBSDKLoginButtonDelegate {
         loginButton.readPermissions = ["public_profile", "email"]
         view.addSubview(loginButton as! UIView)
         // Do any additional setup after loading the view.
+        
+        if cerrar{
+            logout()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "principal") as! ViewController
+            present(vc, animated: false, completion: nil)
+        }
     }
     
     func logout(){
         FBSDKLoginManager().logOut()
+
+        
     }
 
     override func didReceiveMemoryWarning() {

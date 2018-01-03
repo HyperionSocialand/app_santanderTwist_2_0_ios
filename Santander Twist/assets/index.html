@@ -84,7 +84,7 @@
 						<img src="img/header/logo-santander.png" height="17px">
 					</li>
 					<li onclick="location.href='index.html'">
-						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+						<a onclick="location.href='index.html"><img src="img/header/logo-twist.svg" height="17px"></a>
 					</li>
 				</ul>
 				<ul class="right">
@@ -193,9 +193,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <!--li>
+	    <li onclick="location.href = 'favoritos.html'"> 
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li-->
+	    </li>
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -413,7 +413,7 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li class="hide-on-med-and-up"><a onclick="location.href='index.html"><img src="img/header/logo-twist.svg"></a></li>
 							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
 							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
 							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
@@ -476,6 +476,7 @@
 		  $(document).ready(function(){
 		  	/*geoLocation();*/
 		  	reinicia_localStorage();
+		  	localStorage.removeItem('corazon');
 		  	var query = decodeURI(window.location.search.substring(1));
 		  	var vars = query.split("&");
 		  	var slug_ = vars[0].split("=");
@@ -528,10 +529,7 @@
 
 		  });
 
-		  	function reinicia_localStorage() {
-		  		localStorage.setItem('take',0);
-		  		localStorage.setItem('offset',0);
-		  	}
+		  	
 
 		  	function vermas(elemnto) {
 		  		$(elemnto).css('display','none');
@@ -588,7 +586,8 @@
 		  	$("#cargador").show();
 		  	$.post( "http://panel.santandertwist.com.mx/api/active_promos/get20Promos",{
 		  		offset: offset,
-		  		take: take+6
+		  		take: take+6,
+		  		username: userdata.username
 			})
 		    .done(function( data ) {
 		    	console.log(data);
@@ -605,8 +604,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -656,9 +660,10 @@
 		    	var html = ''; 
 		    	var x = 0;
 		    	$.each(data.banners, function (key,value) {
+		    		//console.log(value.banner_url);
 		    		var url_split = value.banner_url.split('?');
 		    		var split_pl = value.banner_url.split('/');
-
+		    		
 		    		//console.log(split_pl[4]);
 
 		    		if (url_split.length == 2) {
@@ -671,8 +676,16 @@
 		    				html += '<div><img onclick="promo_interior(\'' + split_pl[4] + '\');" src="' + str + '"></div>';
 		    			}		    			
 		    		}else{
-		    			var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
-		    			html += '<div><img onclick="promo_interior(\'' + split_pl[4] + '\');" src="' + str + '"></div>';
+		    			console.log(value.banner_url);
+		    			console.log(split_pl[2]);
+		    			if (split_pl[2] == 'santandertwist.com.mx') {
+		    				var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
+		    				html += '<div><img onclick="promo_interior(\'' + split_pl[4] + '\');" src="' + str + '"></div>';
+		    			}else{
+		    				var str = value.small_image.replace('http://panel.santandertwist.com.mx','https://uploads.santandertwist.com.mx');
+		    				html += '<div><img onclick="otros_sitios(\'' + value.banner_url + '\');" src="' + str + '"></div>';
+		    			}
+		    			
 		    		}		    		
 		    		
 		    	})
@@ -712,7 +725,8 @@
 		  	$.post( "http://panel.santandertwist.com.mx/api/active_promos/get20PromosByCategory",{
 		  		category : cat,
 		  		offset: offset,
-		  		take: take+6
+		  		take: take+6,
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	 
@@ -729,8 +743,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -764,7 +783,8 @@
 			$("#cargador").show();		  	
 		  	$.get( "http://panel.santandertwist.com.mx/api/active_promos/get20PromosByState?state_code=" + state,{
 		  		offset: offset,
-		  		take: take+6
+		  		take: take+6,
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	 
@@ -781,8 +801,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -808,6 +833,8 @@
 		  	reactivar_todas();
 			$("#cargador").show();
 		  	$.get( "http://panel.santandertwist.com.mx/api/get_cerca_de_mi?lat=" + localStorage.getItem('lat') + '&long=' + localStorage.getItem('long'),{
+		  		
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	 
@@ -824,8 +851,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -874,18 +906,18 @@
             }
 			
 			function cacheClean() {
-               // Android.chacheRemove();
-               window.location = "otrauri://chacheRemove?show_activity_indicator=true";
+                //Android.chacheRemove();
+                window.location = "otrauri://chacheRemove?show_activity_indicator=true";
             }
 			
 			function consoleLog(view) {
-               // Android.console_view(view);
-               window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
+                //Android.console_view(view);
+                window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
             }
 			
 			function tarjeta() {
-               // Android.tarjetasbanco();
-               window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+                //Android.tarjetasbanco();
+                window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
             }
 
             function oprimir_back(){

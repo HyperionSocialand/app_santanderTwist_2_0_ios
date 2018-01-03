@@ -169,9 +169,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <!--li>
+	    <li onclick="location.href = 'favoritos.html'"> 
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li-->
+	    </li>
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -198,29 +198,8 @@
 						<div class="contenido_tab_p">
 							<div class="cuadro_cont">
 								<div class="row" id="favoritas">
-									<div class="col s12 valign-wrapper">
-										<div class="col s8 valign-wrapper">
-											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
-											<p class="justify-align black-text">Proyectos BETRE</p>
-										</div>
-										<div class="col s4 right-align"><p class="precio_p"></p>
-										</div>
-									</div>
-									<div class="col s12 valign-wrapper">
-										<div class="col s8 valign-wrapper">
-											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
-											<p class="justify-align black-text">Proyectos BETRE</p>
-										</div>
-										<div class="col s4 right-align"><p class="precio_p"></p>
-										</div>
-									</div>
-									<div class="col s12 valign-wrapper">
-										<div class="col s8 valign-wrapper">
-											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
-											<p class="justify-align black-text">Proyectos BETRE</p>
-										</div>
-										<div class="col s4 right-align"><p class="precio_p"></p>
-										</div>
+									<div class="cuadro_bor_red" >
+										<h2>SIN PROMOCIONES FAVORITAS</h2>
 									</div>
 								</div>
 							</div>
@@ -238,7 +217,7 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li class="hide-on-med-and-up"><a onclick="location.href='index.html"><img src="img/header/logo-twist.svg"></a></li>
 							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
 							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
 							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
@@ -284,7 +263,43 @@
 </body>
 
 <script type="text/javascript">
+	$(document).ready(function () {
+		$('#not').append(" " + userdata.username);
+		load_active();
+		localStorage.removeItem('corazon');
+	})
 
+	function load_active() {		
+		$.get( "http://panel.santandertwist.com.mx/api/get_user_favoritas/" + userdata.username,{
+		})
+		.done(function(data) {	
+			console.log(data);
+			html='';	
+			$.each(data.favorites ,function (index,value) {
+				html += '<div class="col s12 valign-wrapper">';
+					html += '<div class="col s7 valign-wrapper" onclick="promo_interior(\''+value.slug+'\')">';
+						html += '<img src="https://uploads.santandertwist.com.mx' + value.small_image + '">';
+						html += '<p class="justify-align black-text">' + value.title + '</p>';
+					html += '</div>';
+					html += '<div class="col s3 right-align rel">';
+						html += '<div class="starCont" >';
+							if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ');location.href=\'favoritos.html\';" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ');location.href=\'favoritos.html\';" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ');location.href=\'favoritos.html\';" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ');location.href=\'favoritos.html\';" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
+						html += '</div>';
+					html += '</div>';
+				html += '</div>';
+			})	
+			$('#favoritas').html(html);
+
+
+				
+		});
+	}
 
 	function tarjeta() {
 		//Android.tarjetasbanco();
@@ -300,5 +315,20 @@
 		//Android.go_otros_sitios(url_go);
         window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
+
+	function wp(pl) {
+        //Android.whatsapp(pl);
+        window.location = "otrauri://sharewp?show_activity_indicator=true&pl=" + pl;
+    }
+			
+	function tw(pl,ti) {
+        //Android.twitter(pl,ti);
+        window.location = "otrauri://sharetwi?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
+    }
+			
+	function fb(ti,pl) {
+       // Android.facebook(ti,pl);
+       window.location = "otrauri://sharefb?show_activity_indicator=true&pl=" + pl + "&tit=" + ti;
+    }
 </script>	
 </html>

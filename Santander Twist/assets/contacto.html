@@ -43,7 +43,7 @@
 						<img src="img/header/logo-santander.png" height="17px">
 					</li>
 					<li onclick="location.href='index.html'">
-						<a href=""><img src="img/header/logo-twist.svg" height="17px"></a>
+						<a onclick="location.href='index.html"><img src="img/header/logo-twist.svg" height="17px"></a>
 					</li>
 				</ul>
 				<ul class="right">
@@ -152,9 +152,9 @@
 		<li onclick="location.href = 'mi_perfil.html';">
 	      	<h6 class="not">Mi perfil</h6>
 	    </li>
-	    <!--li>
+	    <li onclick="location.href = 'favoritos.html'"> 
 	      	<h6 class="not">Mis favoritas</h6>
-	    </li-->
+	    </li>
 	    <li onclick="logout()">
 	      <h6 class="not">Cerrar sesión</h6>
 	    </li>
@@ -229,7 +229,7 @@
 				<div class="row">
 					<div class="col s12">
 						<ul class="top_foo">
-							<li class="hide-on-med-and-up"><a href="index.html"><img src="img/header/logo-twist.svg"></a></li>
+							<li class="hide-on-med-and-up"><a onclick="location.href='index.html"><img src="img/header/logo-twist.svg"></a></li>
 							<li><a href="terminos_condiciones.html" class="fancybox"><span>Información general</span></a></li>
 							<li onclick="tarjeta()"><a><span>Tarjetas de crédito</span></a></li>
 							<li><a href="contacto.html"><span>Contáctanos</span></a></li>
@@ -289,6 +289,7 @@
 		$(document).ready(function() {
 			userdata = JSON.parse(localStorage["userdata"]);		  	
 			$('#not').append(" " + userdata.username);
+			localStorage.removeItem('corazon');
 		})
 		function sendMail() {
 			$.post( "http://panel.santandertwist.com.mx/api/sendmail",{ 

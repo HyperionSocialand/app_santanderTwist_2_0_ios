@@ -126,7 +126,7 @@ h1.tit_miperfil {
 	position: absolute;
 	background-color: #ffffff;
 	border-radius: 50%;
-	z-index: 1;
+	z-index: 15;
 	cursor: pointer;
 	text-align: center;
 }
@@ -365,4 +365,13 @@ h3.tit_favoritos {
     text-align: center;
     background: #FAFAFA;
     padding: 15px 0px;
+}
+.starCont {
+    position: relative;
+    display: inline-block;
+}
+.starCont img{
+    width: 18px;
+    height: 18px;
+    margin: 0px;
 }

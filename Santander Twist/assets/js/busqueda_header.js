@@ -6,7 +6,10 @@
 	      });
 
 
-		  
+		  function reinicia_localStorage() {
+		  		localStorage.setItem('take',0);
+		  		localStorage.setItem('offset',0);
+		  	}
 
 		  function load_estados() {
 		  	$.get( "http://panel.santandertwist.com.mx/api/get_states",{
@@ -85,7 +88,8 @@
 		  	reactivar_todas();
 		  	$("#cargador").show();
 		  	$.get( "http://panel.santandertwist.com.mx/api/get_cerca_de_mi_header?lat=" + localStorage.getItem('lat') + "&long=" + localStorage.getItem('long'),{
-		  		buscar : buscar
+		  		buscar : buscar,
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	/////console.log(data); 
@@ -100,8 +104,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -124,11 +133,32 @@
 
 		  }
 
+		  function fav_select(status,promo_id) {
+		  	if (status == 0) {
+		  		$("#img_red"+promo_id).removeClass('hide');
+		  		$("#img_white"+promo_id).addClass('hide');
+		  	}else if (status == 1){
+		  		$("#img_red"+promo_id).addClass('hide');
+		  		$("#img_white"+promo_id).removeClass('hide');
+		  	}
+
+		  	$.get( "http://panel.santandertwist.com.mx/api/set_favorites",{
+		  		username: userdata.username,
+		  		id_promo: promo_id,
+		  		status: status
+
+			})
+		    .done(function( data ) {
+		    	console.log(data);
+		    });
+		  }
+
 		  function get_orden_alfa(buscar) {
 		  	reactivar_todas();
 		  	$("#cargador").show();
 		  	$.get( "http://panel.santandertwist.com.mx/api/get_orden_alfa",{
-		  		buscar : buscar
+		  		buscar : buscar,
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	
@@ -144,8 +174,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
@@ -172,7 +207,8 @@
 		  	$("#cargador").show();
 		  	$.get( "http://panel.santandertwist.com.mx/api/get_categoria",{
 		  		buscar : buscar,
-		  		categoria : localStorage.getItem('categoria')
+		  		categoria : localStorage.getItem('categoria'),
+		  		username: userdata.username
 			})
 		    .done(function( data ) {	
 		    	/////console.log(data); 
@@ -187,8 +223,13 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';

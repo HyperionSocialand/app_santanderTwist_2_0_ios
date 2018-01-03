@@ -199,7 +199,9 @@ class ViewController: UIViewController,UIWebViewDelegate,UIScrollViewDelegate,WK
         }
         
         if(_req.contains("cerrarFace")){
-            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "face") as! FacebookViewController
+            vc.cerrar = true
+            self.present(vc, animated: false,completion: nil)
         }
         
         return true;

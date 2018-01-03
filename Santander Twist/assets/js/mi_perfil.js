@@ -1,6 +1,7 @@
 
 	
 	$(document).ready(function(){
+		localStorage.removeItem('corazon');
 		userdata = JSON.parse(localStorage["userdata"]);
 		if (userdata.fbdata==0) {
 					console.log(userdata.fbdata);
@@ -184,19 +185,24 @@
 									html += '</div>';
 								html += '</a>';
 								html += '<div class="starCont">';
-									html += '<img src="img/ic_corazon_white.svg" class="hide responsive-img">';
-									html += '<img src="img/ic_corazon_red.svg" class="responsive-img">';
+									if (value.favorita == 'no') {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="hide responsive-img">';
+									}else {
+										html += '<img id="img_white' + value.promo_id + '" onclick="fav_select(0,' + value.promo_id + ')" src="img/ic_corazon_white.svg" class="hide responsive-img">';
+										html += '<img id="img_red' + value.promo_id + '" onclick="fav_select(1,' + value.promo_id + ')" src="img/ic_corazon_red.svg" class="responsive-img">';
+									}
 								html += '</div>';
 							html += '</div>';
 							html += '<div class="action cntR">';
 								html += '<div class="ssrr">';
-									html += '<i class="fa fa-facebook-square fa-2x icono pointer"></i>';
-									html += '<i class="fa fa-twitter-square fa-2x icono pointer"></i>';
-									html += '<a href="">';
+									html += '<i class="fa fa-facebook-square fa-2x icono pointer" onclick="fb(\''+value.title+'\',\''+value.slug+'\');"></i>';
+									html += '<i class="fa fa-twitter-square fa-2x icono pointer" onclick="tw(\''+value.slug+'\',\''+value.title+'\');"></i>';
+									html += '<a onclick="wp(\''+value.slug+'\');">';
 										html += '<img src="img/whatsapp_gris.svg" width="27px">';
 									html += '</a>';
 								html += '</div>';
-								html += '<button class="btn btn_red_white">Ver Promoción</button>';
+								html += '<button class="btn btn_red_white" onclick="promo_interior(\''+value.slug+'\')">Ver Promoción</button>';
 							html += '</div>';
 						html += '</div>';
 					html += '</div>';
