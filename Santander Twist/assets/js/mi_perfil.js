@@ -179,7 +179,7 @@
 									html += '<div class="tit_over">';
 										html += '<div>';
 											html += '<h2>' + value.title + '</h2>';
-											html += '<p>' + value.detail + '</p>';
+											html += '<p>' + value.facebooktext + '</p>';
 										html += '</div>';
 									html += '</div>';
 								html += '</a>';

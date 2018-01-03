@@ -359,3 +359,10 @@ button[type="submit"].btn_red,button[type="button"].btn_red {
     text-overflow: ellipsis;
     font-weight: 300;
 }
+h3.tit_favoritos {
+    color: #333;
+    font-size: 22px;
+    text-align: center;
+    background: #FAFAFA;
+    padding: 15px 0px;
+}

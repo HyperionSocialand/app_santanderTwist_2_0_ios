@@ -118,7 +118,7 @@
 
 	<ul class="menu st" id="menuNew">
 		<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
-		<li class="mb20">
+		<li class="mb20" onclick="location.href='index.html'">
 			<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
 		</li>
 		<li>
@@ -677,8 +677,7 @@
   </script>
 <script type="text/javascript">
 	function tarjeta() {
-		//Android.tarjetasbanco();
-        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
+		Android.tarjetasbanco();
 	}
 	
 	function oprimir_back(){
@@ -687,8 +686,7 @@
 
 	function otros_sitios(url_go) {
 		//console.log(url_go);
-		//Android.go_otros_sitios(url_go);
-        window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
+		Android.go_otros_sitios(url_go);
 	}
 </script>
 	</div>

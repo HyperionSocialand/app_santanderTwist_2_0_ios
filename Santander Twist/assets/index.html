@@ -131,7 +131,7 @@
 
 	<ul class="menu st" id="menuNew">
 		<li class="closeMain" onclick="openMenu();" role="button" tabindex="0"></li>
-		<li class="mb20">
+		<li class="mb20" onclick="location.href='index.html'">
 			<img src="img/header/logo-twist.svg" height="30px" class="mainLogo">
 		</li>
 		<li>
@@ -591,7 +591,7 @@
 		  		take: take+6
 			})
 		    .done(function( data ) {
-		    	//console.log(data);
+		    	console.log(data);
 		    	var html = '';
 		    	var x = 0;
 		      	$.each(data, function( index, value ) {
@@ -879,8 +879,8 @@
             }
 			
 			function consoleLog(view) {
-                //Android.console_view(view);
-                window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
+               // Android.console_view(view);
+               window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
             }
 			
 			function tarjeta() {

@@ -190,152 +190,39 @@
 
 	<div class="main minh300">
 
-		<section id="select">
+		<section id="favoritos" class="mt10">
 			<div class="container">
 				<div class="row">
 					<div class="col s12">
-						<div class="row mobile_perfil">
-							<div class="input-field col s12 center-align">
-								<select value="" id="select_perfil" onchange="throw_function(this.value)">
-									<option value="1" selected="">Mi perfil</option>
-									<option value="2">Promociones activas</option>
-									<option value="3">Promociones redimidas</option>
-									<option value="4">Estado de cuenta</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		
-
-		<section id="sec_1" class="section_perfil" style="display: block;">
-			<div class="container">
-				<div class="row">
-					<div class="col s12">
-						<h1 class="left-align tit_miperfil">Mi perfil</h1>
-						<form class="form" method="post">
-							<div class="row">
-								<div class="input-field col s12 left-align">
-									<p>Usuario</p>
-									<input type="text" name="" id="username" class="validate" disabled value="">
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12 left-align">
-									<p>Nombre</p>
-									<input type="text" name="" id="nombre" class="validate" value="">
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12 left-align">
-									<p>Apellido paterno</p>
-									<input type="text" name="" id="a_paterno" class="validate" value="">
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12 left-align">
-									<p>Apellido materno</p>
-									<input type="text" name="" id="a_materno" class="validate" value="">
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12 left-align">
-									<p>Correo electrónico</p>
-									<input type="email" name="" id="email" class="validate" value="">
-								</div>
-							</div>
-							<div class="row" id="pass_new">
-								<div class="input-field col s12 left-align">
-									<p>Contraseña nueva</p>
-									<input type="password" id="pass" name="" class="validate">
-								</div>
-							</div>
-							<div class="row" id="pas_conf">
-								<div class="input-field col s12 left-align">
-									<p>Confirmar contraseña</p>
-									<input type="password" id="pass_con" name="" class="validate">
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12 center-align">
-									<button class="btn btn_actualizar" id="btn_act" type="button">Actualizar</button>
-								</div>
-							</div>
-						</form>
-						<div class="row">
-							<div class="col s8 offset-s2 valign-wrapper center-align dv_conect_face mt20">
-								<img src="img/facebook_logo.png" class="responsive-img ">
-								<p class="administra_p left-align">Administra tu conexión a <span class="lt_red">Santander Twist</span> con tu cuenta de Facebook</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12 center-align">
-								<button id="bt_fb" class="btn btn_face">Vincula con Facebook</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="sec_2" class="section_perfil">
-			<div class="container">
-				<div class="row">
-					<div class="col s12">
-						<div class="row">
-							<div class="col s12 cupones" id="promos_activas">
-
-							</div>
-						</div>						
-						<div class="maxCont" id="div_no_act">
-							<div class="cuadro_bor_red" >
-								<h2>SIN PROMOCIONES ACTIVAS</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="sec_3" class="section_perfil">
-			<div class="container">
-				<div class="row">
-					<div class="col s12">
+						<h3 class="tit_favoritos">Mis Promociones favoritas</h3>
 						<div class="contenido_tab_p">
 							<div class="cuadro_cont">
-								<div class="row" id="promos_redimidas">
-									
+								<div class="row" id="favoritas">
+									<div class="col s12 valign-wrapper">
+										<div class="col s8 valign-wrapper">
+											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
+											<p class="justify-align black-text">Proyectos BETRE</p>
+										</div>
+										<div class="col s4 right-align"><p class="precio_p"></p>
+										</div>
+									</div>
+									<div class="col s12 valign-wrapper">
+										<div class="col s8 valign-wrapper">
+											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
+											<p class="justify-align black-text">Proyectos BETRE</p>
+										</div>
+										<div class="col s4 right-align"><p class="precio_p"></p>
+										</div>
+									</div>
+									<div class="col s12 valign-wrapper">
+										<div class="col s8 valign-wrapper">
+											<img src="https://uploads.santandertwist.com.mx/uploads/small_images/proyectos-betre-300x195_olDaNAUR3yqTLZmRhBeDaw9Cc1vWK5If.jpg">
+											<p class="justify-align black-text">Proyectos BETRE</p>
+										</div>
+										<div class="col s4 right-align"><p class="precio_p"></p>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>						
-						<div class="maxCont" id="div_no_red">
-							<div class="cuadro_bor_red">
-								<h2>SIN PROMOCIONES REDIMIDAS</h2>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="sec_4" class="section_perfil">
-			<div class="container">
-				<div class="row">
-					<div class="col s12">
-						<div class="tab_p_cont mb40">
-							<ul class="mg0">
-								<li data="1" onclick="load_facturacion(1)" class="active">Promociones </br> vigentes</li>
-								<li data="2" onclick="load_facturacion(2)">Promociones </br> anteriores</li>
-							</ul>
-						</div>
-						<div class="contenido_tab_p">
-							<div class="cuadro_cont" id="cuadro_cont1">
-								
-							</div>
-							<div class="cuadro_cont" id="cuadro_cont2" style="display: none;">
-								
 							</div>
 						</div>
 					</div>
@@ -393,58 +280,15 @@
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script type="text/javascript" src="js/global.js"></script>
 		<script type="text/javascript" src='js/busqueda_header.js'></script>
-		<script type="text/javascript" src="js/perfil.js"></script>
-		<script type="text/javascript" src="js/mi_perfil.js"></script>
 	</div>
 </body>
-<script>
-	
-
-	function desvincular() {
-		console.log(localStorage.getItem("promo_interior_shop"));
-		$.post( "http://panel.santandertwist.com.mx/api/update_desvincular",{ 
-			buc_final: userdata.buc_final
-		})
-		.done(function( data ) {
-			console.log('data : ' + data);
-			if (data.code==200) {
-				//console.log(data);
-				Materialize.toast(data.message, 6000);
-				localStorage.setItem('username_fb_act',$('#username').val());
-				localStorage.setItem('email_fb_act',$('#email').val());
-				localStorage.setItem('buc_final',userdata.buc_final);
-
-			  	location.href="registro.html";
-			}
-			if (data.code==101) {
-				
-				Materialize.toast(data.message, 6000);
-				localStorage.setItem('username_fb_act',$('#username').val());
-				localStorage.setItem('email_fb_act',$('#email').val());
-				localStorage.setItem('buc_final',userdata.buc_final);
-				userdata.fbdata = 1;
-				location.reload();
-			  	//location.href="mi_perfil.html";
-			}
-			
-		});
-	}
-
-	function vincular() {
-        Android.loginFaceBook(userdata.buc_final,1);
-
-        location.reload();
-
-    }
-</script>
 
 <script type="text/javascript">
 
-	var corazon = false;
-
 
 	function tarjeta() {
-		Android.tarjetasbanco();
+		//Android.tarjetasbanco();
+        window.location = "otrauri://tarjetasbanco?show_activity_indicator=true";
 	}
 	
 	function oprimir_back(){
@@ -453,7 +297,8 @@
 
 	function otros_sitios(url_go) {
 		console.log(url_go);
-		Android.go_otros_sitios(url_go);
+		//Android.go_otros_sitios(url_go);
+        window.location = "otrauri://otros_sitios?show_activity_indicator=true&url_go=" + url_go;
 	}
 </script>	
 </html>

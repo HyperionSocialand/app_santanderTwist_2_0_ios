@@ -142,14 +142,12 @@ function login() {
 
     function LoginFace() {
     	
-        //Android.loginFaceBook('',0);
-        window.location = "otrauri://loginfacebook?show_activity_indicator=true";
+        Android.loginFaceBook('',0);
 
     }
 	
 	function consoleLog(view) {
-		//Android.console_view(view);
-        window.location = "otrauri://consolelog?show_activity_indicator=true&view=" + view;
+		Android.console_view(view);
 	}
 </script>
 
